@@ -11,8 +11,18 @@ const port = process.env.PORT || 8080
 app.set('port', port)
 
 // Import API Routes
-app.use('/api', api)
-app.use('/api', proxy({target: "http://114.215.83.139/fjw/api.php",changeOrigin: true}))
+// app.use('/api', api)
+app.use('/api', proxy({
+    target: "http://114.215.83.139",
+    pathRewrite: {
+        "^/api": '/fjw/api.php?'
+    }
+}))
+app.use((req, res, next) => {
+  console.log(req.url)
+    next();
+})
+
 
 // Import and Set Nuxt.js options
 let config = require('../nuxt.config.js')
