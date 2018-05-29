@@ -14,6 +14,8 @@ app.set('port', port)
 // app.use('/api', api)
 app.use('/api', proxy({
     target: "http://114.215.83.139",
+    logLevel: "debug",
+    changeOrigin: true,
     pathRewrite: {
         "^/api": '/fjw/api.php?'
     }
