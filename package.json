@@ -23,10 +23,12 @@
     "cross-env": "^5.0.1",
     "express": "^4.15.3",
     "http-proxy-middleware": "^0.18.0",
+    "md5": "^2.2.1",
     "node-sass": "^4.9.0",
     "nuxt": "^1.0.0-rc3",
     "sass-loader": "^7.0.1",
-    "source-map-support": "^0.4.15"
+    "source-map-support": "^0.4.15",
+    "vue-notifications": "^0.9.0"
   },
   "devDependencies": {
     "babel-eslint": "^7.2.3",

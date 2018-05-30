@@ -2,6 +2,8 @@ import express from 'express'
 import { Nuxt, Builder } from 'nuxt'
 import proxy from 'http-proxy-middleware'
 
+
+
 import api from './api'
 
 const app = express()
@@ -12,18 +14,19 @@ app.set('port', port)
 
 // Import API Routes
 // app.use('/api', api)
+app.use(function(req, res, next){
+    console.log(req.url);
+    next()
+})
 app.use('/api', proxy({
     target: "http://114.215.83.139",
     logLevel: "debug",
     changeOrigin: true,
     pathRewrite: {
-        "^/api": '/fjw/api.php?'
+        "^/api": '/fjw'
     }
 }))
-app.use((req, res, next) => {
-  console.log(req.url)
-    next();
-})
+
 
 
 // Import and Set Nuxt.js options
