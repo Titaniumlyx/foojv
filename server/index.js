@@ -19,7 +19,7 @@ app.use(function(req, res, next){
     next()
 })
 app.use('/api', proxy({
-    target: "http://114.215.83.139",
+    target: "http://www.fooju.cn/",
     logLevel: "debug",
     changeOrigin: true,
     pathRewrite: {

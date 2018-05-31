@@ -1,0 +1,75 @@
+.header-content {
+  width: 1100px;
+  margin: 0 auto;
+  font-size: 16px;
+}
+
+.header-content>div {
+  float: left;
+}
+.header-content .logo {
+  float: left;
+  margin-top: 17px;
+}
+
+.select-city {
+  padding-top: 24px;
+  cursor: pointer;
+  position: relative;
+  span {
+    display: inline-block;
+    font-size: 16px;
+    padding: 4px 10px;
+    margin-left: 20px;
+    border: 1px solid #999;
+    border-radius: 15px;
+    color: #333;
+  }
+}
+
+.header-content .nav{
+  padding-top: 20px;
+  float: right;
+  span {
+    float: left;
+    padding-left: 30px;
+  }
+
+  .spinner {
+    &:hover .spinner-content{
+    display: block;
+  }
+    position: relative;
+    .spinner-content {
+      position: absolute;
+      width: 100%;
+      top: 100%;
+      left: 0;
+      display: none;
+      z-index: 9999;
+      div {
+        padding: 10px 0 5px;
+        cursor: pointer;
+        margin-right: -30px;
+        text-align: center;
+        background: #fff;
+      }
+    }
+  }
+}
+
+
+.nav .active {
+  color: #c30d23;
+}
+.nav .active>a {
+  color: #c30d23;
+  border-bottom: 2px solid #c30d23;
+}
+
+.nav>.nav-item>a {
+  display: block;
+  padding: 10px 0 20px;
+}
+
+
