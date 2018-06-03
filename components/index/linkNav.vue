@@ -6,7 +6,7 @@
                     <img src="/imgs/logo.png">
                 </nuxt-link>
             </h1>
-            <div class="select-city"><span>新城区 <i class="iconfont icon-jiantouxia"></i></span></div>
+            <div class="select-city" @click="showMark = true"><span>{{selectText}} <i class="iconfont icon-jiantouxia"></i></span></div>
             <div class="nav clearfix" v-nav>
                         <span class="nav-item">
                             <nuxt-link to="/" target="_blank">首页</nuxt-link>
@@ -51,10 +51,37 @@
                         </span>
             </div>
         </div>
+        <div class="mark" v-show="showMark">
+            <div class="select-box">
+                <div class="box-title">
+                    <span>选择区县</span>
+                    <i class="iconfont icon-chahao" @click="showMark = false"></i>
+                </div>
+                <div class="select-content clearfix">
+                    <div class="current-item">
+                        <span @click="$router.go(0)">{{selectText}}</span>
+                    </div>
+                    <ul>
+                        <li v-for="item in regionList">
+                            <span class="item-char fll">
+                                {{item.key}}
+                            </span>
+                            <span class="item-text">
+                                {{item.list[0].area}}
+                            </span>
+                        </li>
+                    </ul>
+
+                </div>
+            </div>
+        </div>
     </div>
 </template>
 
+
 <script>
+    import axios from '~/plugins/axios'
+    import api from '~/api'
     export default {
         name: "linkNav",
         directives: {
@@ -63,16 +90,34 @@
                     let spans = [...el.children]
                     spans.forEach(item => {
                         if(item.children[0].getAttribute("href") == vnode.context.$route.path){
-                            item.classList.add("active")
+                            item.className += " active"
                         }
                     })
                 }
             }
         },
+        props: {
+            regionList: {
+                type: Array
+            }
+        },
         data() {
             return {
-                showSpinnerContent: false
+                showSpinnerContent: false,
+                selectText: "呼和浩特",
+                showMark: false
             }
+        },
+        methods: {
+            getRegion() {
+                axios.get(api.regionLists).then(res => {
+                    console.log(res)
+                })
+            }
+        },
+        mounted() {
+            // this.getRegion();
+            console.log(this.regionList)
         }
     }
 </script>

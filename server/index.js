@@ -14,10 +14,10 @@ app.set('port', port)
 
 // Import API Routes
 // app.use('/api', api)
-app.use(function(req, res, next){
-    console.log(req.url);
-    next()
-})
+// app.use(function(req, res, next){
+//     console.log(req.url);
+//     next()
+// })
 app.use('/api', proxy({
     target: "http://www.fooju.cn/",
     logLevel: "debug",

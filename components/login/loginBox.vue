@@ -60,7 +60,7 @@
                     password: md5(md5(this.pwd))+"fujuwang"
                 }
                 params = qs.stringify(params)
-                axios.post("/api/api.php?s=Login/login", params).then(res => {
+                axios.post("/api.php?s=Login/login", params).then(res => {
                     if(res.data.code!=200){
                         alert(res.data.msg)
                     }

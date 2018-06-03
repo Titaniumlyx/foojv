@@ -2,7 +2,7 @@ import * as axios from 'axios'
 
 
 let options = {
-    baseURL: 'http://localhost:8080',
+    baseURL: 'http://localhost:8080/api',
     timeout: 5000,
     headers: {"Content-Type": "application/x-www-form-urlencoded"}
 }

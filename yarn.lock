@@ -735,6 +735,14 @@ babel-polyfill@6.23.0:
     core-js "^2.4.0"
     regenerator-runtime "^0.10.0"
 
+babel-polyfill@^6.26.0:
+  version "6.26.0"
+  resolved "http://registry.npm.taobao.org/babel-polyfill/download/babel-polyfill-6.26.0.tgz#379937abc67d7895970adc621f284cd966cf2153"
+  dependencies:
+    babel-runtime "^6.26.0"
+    core-js "^2.5.0"
+    regenerator-runtime "^0.10.5"
+
 babel-preset-backpack@^0.4.0:
   version "0.4.0"
   resolved "https://registry.yarnpkg.com/babel-preset-backpack/-/babel-preset-backpack-0.4.0.tgz#e4d585caf189105ca2b27683c0d54932fcd7b92c"
@@ -843,7 +851,7 @@ babel-register@^6.24.1:
     mkdirp "^0.5.1"
     source-map-support "^0.4.2"
 
-babel-runtime@6.x:
+babel-runtime@6.x, babel-runtime@^6.26.0:
   version "6.26.0"
   resolved "http://registry.npm.taobao.org/babel-runtime/download/babel-runtime-6.26.0.tgz#965c7058668e82b55d7bfe04ff2337bc8b5647fe"
   dependencies:
@@ -1484,6 +1492,10 @@ core-js@^2.4.0:
   version "2.4.1"
   resolved "https://registry.yarnpkg.com/core-js/-/core-js-2.4.1.tgz#4de911e667b0eae9124e34254b53aea6fc618d3e"
 
+core-js@^2.5.0:
+  version "2.5.7"
+  resolved "http://registry.npm.taobao.org/core-js/download/core-js-2.5.7.tgz#f972608ff0cead68b841a16a932d0b183791814e"
+
 core-util-is@~1.0.0:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/core-util-is/-/core-util-is-1.0.2.tgz#b5fd54220aa2bc5ab57aab7140c940754503c1a7"
@@ -1856,6 +1868,12 @@ dom-serializer@0:
   dependencies:
     domelementtype "~1.1.1"
     entities "~1.1.1"
+
+dom7@^2.0.6:
+  version "2.0.6"
+  resolved "http://registry.npm.taobao.org/dom7/download/dom7-2.0.6.tgz#ea9f187de68635783cd5985fde52842763632903"
+  dependencies:
+    ssr-window "^1.0.0"
 
 domain-browser@^1.1.1:
   version "1.1.7"
@@ -5110,7 +5128,7 @@ regenerate@^1.2.1:
   version "1.3.2"
   resolved "https://registry.yarnpkg.com/regenerate/-/regenerate-1.3.2.tgz#d1941c67bad437e1be76433add5b385f95b19260"
 
-regenerator-runtime@^0.10.0:
+regenerator-runtime@^0.10.0, regenerator-runtime@^0.10.5:
   version "0.10.5"
   resolved "https://registry.yarnpkg.com/regenerator-runtime/-/regenerator-runtime-0.10.5.tgz#336c3efc1220adcedda2c9fab67b5a7955a33658"
 
@@ -5680,6 +5698,10 @@ sshpk@^1.7.0:
     jsbn "~0.1.0"
     tweetnacl "~0.14.0"
 
+ssr-window@^1.0.0:
+  version "1.0.0"
+  resolved "http://registry.npm.taobao.org/ssr-window/download/ssr-window-1.0.0.tgz#8ed1b6beaa0a371ba7e74d6515d584c3f1cf973c"
+
 stackframe@^1.0.3:
   version "1.0.3"
   resolved "https://registry.yarnpkg.com/stackframe/-/stackframe-1.0.3.tgz#fe64ab20b170e4ce49044b126c119dfa0e5dc7cc"
@@ -5830,6 +5852,13 @@ svgo@^0.7.0:
     mkdirp "~0.5.1"
     sax "~1.2.1"
     whet.extend "~0.9.9"
+
+swiper@^4.0.7:
+  version "4.3.2"
+  resolved "http://registry.npm.taobao.org/swiper/download/swiper-4.3.2.tgz#752f2262c74dbdaab8be0e047fe59bf726d7cba1"
+  dependencies:
+    dom7 "^2.0.6"
+    ssr-window "^1.0.0"
 
 table@^4.0.1:
   version "4.0.1"
@@ -6189,6 +6218,13 @@ vm-browserify@0.0.4:
   resolved "https://registry.yarnpkg.com/vm-browserify/-/vm-browserify-0.0.4.tgz#5d7ea45bbef9e4a6ff65f95438e0a87c357d5a73"
   dependencies:
     indexof "0.0.1"
+
+vue-awesome-swiper@^3.1.3:
+  version "3.1.3"
+  resolved "http://registry.npm.taobao.org/vue-awesome-swiper/download/vue-awesome-swiper-3.1.3.tgz#05500b501ffb3fec9bf7eb9985bcf4ae8360ed9e"
+  dependencies:
+    object-assign "^4.1.1"
+    swiper "^4.0.7"
 
 vue-hot-reload-api@^2.1.0:
   version "2.1.0"

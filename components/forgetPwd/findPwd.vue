@@ -45,7 +45,7 @@
             sendSms() {
                 if(!this.isSending){
                     this.handleBtnText();
-                    axios.get(`/api/api.php?s=Msg/send_msg/mobile/${this.mobile}`).then(res => {
+                    axios.get(`/api.php?s=Msg/send_msg/mobile/${this.mobile}`).then(res => {
                         if(res.data.code !== 200){
                             alert(res.data.msg)
                         }
