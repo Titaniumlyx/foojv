@@ -35,8 +35,6 @@ module.exports = {
                     // exclude: /(node_modules)/
                 // })
                 config.entry['babel-polyfill'] = ['babel-polyfill']
-                console.log(config.entry)
-
             }
         }
     },

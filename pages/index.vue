@@ -27,7 +27,10 @@
                             <li class="search-input active">
                                 <input type="text" placeholder="输入小区名查找二手房">
                                 <span class="search-btn">搜索</span>
-                                span
+                                <span class="map-find">
+                                    <img src="/imgs/mapSearch.png">
+                                    地图找房
+                                </span>
                             </li>
                             <li class="search-input"></li>
                             <li class="search-input"></li>
@@ -72,7 +75,7 @@
                         let bodyHeight = document.documentElement.clientHeight || document.body.clientHeight;
                         let bodyWidth = document.documentElement.clientWidth || document.body.clientWidth;
                         let bannerHeight = bodyHeight - headerHeight;
-                        let imgs = el.querySelectorAll("img");
+                        let imgs = el.querySelectorAll(".swiper-wrapper img");
                         let bannerRatio = bodyWidth/bannerHeight;
 
                         el.style.height = bannerHeight + "px";
@@ -210,6 +213,16 @@
             text-align: center;
             line-height: 60px;
             cursor: pointer;
+        }
+        .map-find {
+            display: inline-block;
+            width: 180px;
+            background: #5f1985;
+            border-radius: 3px;
+            img {
+                width: 20px;
+                height: 20px;
+            }
         }
     }
 </style>
