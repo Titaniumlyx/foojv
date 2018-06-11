@@ -20,7 +20,6 @@ app.set('port', port)
 // })
 app.use('/api', proxy({
     target: "http://www.fooju.cn/",
-    logLevel: "debug",
     changeOrigin: true,
     pathRewrite: {
         "^/api": '/fjw'

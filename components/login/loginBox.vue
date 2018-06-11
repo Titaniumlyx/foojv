@@ -25,7 +25,7 @@
                 <div class="third-login clearfix">
                     <a class="qq fll" href="#">
                         <img src="/imgs/u336.png">
-                        <div class="desc">qq登录</div>
+                        <div class="desc" id="qqLogin">qq登录</div>
                     </a>
                     <a class="wx fll" href="#">
                         <img src="/imgs/u326.png">
@@ -61,9 +61,7 @@
                 }
                 params = qs.stringify(params)
                 axios.post("/api.php?s=Login/login", params).then(res => {
-                    if(res.data.code!=200){
-                        alert(res.data.msg)
-                    }
+                    alert(res.data.msg)
                 })
             }
         }

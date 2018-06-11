@@ -24,7 +24,7 @@
                             <li :class="{active: selectTab==5}" @click="selectTab=5">找小区</li>
                         </ul>
                         <ul class="search-inputs">
-                            <li class="search-input active">
+                            <li class="search-input" style="display: block">
                                 <input type="text" :placeholder="placeText">
                                 <span class="search-btn">搜索</span>
                                 <span class="map-find" v-if="selectTab<4">
@@ -32,13 +32,20 @@
                                     地图找房
                                 </span>
                             </li>
-                            <li class="search-input"></li>
-                            <li class="search-input"></li>
-                            <li class="search-input"></li>
-                            <li class="search-input"></li>
                         </ul>
                     </div>
-                    
+                    <div class="bottom-slider" style="height: 30px">
+                        <div class="headline-wrap" style="float: left;">
+                            <img src="/imgs/toutiao.png">
+                        </div>
+                        <div v-swiper:headlineSwiper="headlineOption" style="line-height: 30px;overflow: hidden;float: left;height: 30px;margin-left: 15px;">
+                            <div class="swiper-wrapper">
+                                <div class="swiper-slide" v-for="item in headlineData">
+                                    <p>{{item.title}}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -55,10 +62,13 @@
         async asyncData() {
             let bannerData = await axios.get(api.paramToUrl(api.adLists,{type: 0,position:0}))
             let res = await axios.get(api.regionListCopy)
+            let headlineData = await axios.get(api.paramToUrl(api.encyTop, {page_num: 0,page_size:10}))
+            console.log(headlineData)
 
             return {
                 region: res.data.data,
-                banners: bannerData.data.data
+                banners: bannerData.data.data,
+                headlineData: headlineData.data.datas[0]
             }
         },
         head() {
@@ -113,7 +123,12 @@
                 swiperOption: {
                     autoplay: true
                 },
-                selectTab: 1
+                selectTab: 1,
+                headlineOption: {
+                    autoplay: true,
+                    direction: 'vertical',
+                    loop: true
+                }
             }
         },
         mounted() {
