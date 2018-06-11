@@ -17,17 +17,17 @@
                 <div class="banner-search">
                     <div class="search-tab">
                         <ul class="search-header clearfix">
-                            <li class="active">找二手房</li>
-                            <li >找新房</li>
-                            <li >找租房</li>
-                            <li >找学区房</li>
-                            <li >找小区</li>
+                            <li :class="{active: selectTab==1}" @click="selectTab=1">找二手房</li>
+                            <li :class="{active: selectTab==2}" @click="selectTab=2">找新房</li>
+                            <li :class="{active: selectTab==3}" @click="selectTab=3">找租房</li>
+                            <li :class="{active: selectTab==4}" @click="selectTab=4">找学区房</li>
+                            <li :class="{active: selectTab==5}" @click="selectTab=5">找小区</li>
                         </ul>
                         <ul class="search-inputs">
                             <li class="search-input active">
-                                <input type="text" placeholder="输入小区名查找二手房">
+                                <input type="text" :placeholder="placeText">
                                 <span class="search-btn">搜索</span>
-                                <span class="map-find">
+                                <span class="map-find" v-if="selectTab<4">
                                     <img src="/imgs/mapSearch.png">
                                     地图找房
                                 </span>
@@ -112,11 +112,23 @@
             return {
                 swiperOption: {
                     autoplay: true
-                }
+                },
+                selectTab: 1
             }
         },
         mounted() {
 
+        },
+        computed: {
+            placeText() {
+                switch (this.selectTab){
+                    case 1: return "输入小区名查找二手房";
+                    case 2: return "输入楼盘名进行搜索";
+                    case 3: return "输入小区名可以查找出租的房屋";
+                    case 4: return "输入小区名搜索学区房";
+                    case 5: return "输入小区名搜索小区";
+                }
+            }
         }
     }
 </script>
@@ -215,13 +227,17 @@
             cursor: pointer;
         }
         .map-find {
-            display: inline-block;
+            float: right;
             width: 180px;
+            height: 60px;
             background: #5f1985;
             border-radius: 3px;
+            text-align: center;
+            line-height: 60px;
             img {
                 width: 20px;
                 height: 20px;
+                vertical-align: middle;
             }
         }
     }
