@@ -18,6 +18,7 @@ var api = {
     Storelists:"api.php?s=Store/lists",/*门店列表*/
     Storedetail:"api.php?s=Store/detail",/*门店详情*/
     encyTop:"api.php?s=Ency/encyTop",/*门店详情*/
+    linkData: "api.php?s=Ency/encyPcIndex", /*大链接标题*/
     indexLeaderboard:"api.php?s=Advertisement/indexLeaderboard",/*pc通栏广告*/
     usedDropdown:"api.php?s=Basics/drop_down_pc",/*二手房筛选条件*/
     houseCollect:"api.php?s=Operation/houseCollect",/*房源收藏*/
@@ -57,6 +58,7 @@ var api = {
     recommend:"api.php?s=Product/recommend/plat/2",/*推荐*/
     recommendNew:"api.php?s=Product/recommend_pc",/*推荐*/
     regionListCopy:"api.php?s=Basics/regionListCopy",/*推荐*/
+    productRecommend: "api.php?s=Product/recommend",  /*推荐合并*/
 
     // http://114.215.83.139/fjw/api.php?api.php?s=Village/school/h_type/new
     paramToUrl:function(a,b){

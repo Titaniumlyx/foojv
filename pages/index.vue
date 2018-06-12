@@ -4,6 +4,7 @@
             <userTop></userTop>
             <linkNav :regionList="region"></linkNav>
         </header>
+        <!--banner栏目开始-->
         <div class="content">
             <div class="banner" v-banner>
                 <div v-swiper:mySwiper="swiperOption" style="height: 100%;overflow: hidden;">
@@ -49,8 +50,84 @@
                 </div>
             </div>
         </div>
+        <!--banner栏目结束-->
+        <!--快速链接开始-->
+        <div class="quick-link">
+            <!--小按钮链接-->
+            <ul class="link-wrap clearfix">
+                <li>
+                    <nuxt-link to="#">
+                        <img src="/imgs/store.png" alt="查门店">
+                        <h2 class="link-title">查门店</h2>
+                        <div>查优质门店</div>
+                    </nuxt-link>
+                </li>
+                <li>
+                    <nuxt-link to="#">
+                        <img src="/imgs/entrust.png" alt="在线委托">
+                        <h2 class="link-title">在线委托</h2>
+                        <div>有问题我们帮您</div>
+                    </nuxt-link>
+                </li>
+                <li>
+                    <nuxt-link to="#">
+                        <img src="/imgs/mapBlue.png" alt="地图找房">
+                        <h2 class="link-title">地图找房</h2>
+                        <div>地图找房</div>
+                    </nuxt-link>
+                </li>
+                <li>
+                    <nuxt-link to="#">
+                        <img src="/imgs/encyclopedias.png" alt="福居百科">
+                        <h2 class="link-title">福居百科</h2>
+                        <div>看百科了解更多</div>
+                    </nuxt-link>
+                </li>
+            </ul>
+            <!--小按钮链接结束-->
+            <!--大图标链接-->
+            <ul class="features clearfix">
+                <li v-for="(item,index) in features">
+                    <img :src="'/imgs/'+(3-index)+'.png'" :alt="item.title">
+                    <div class="desc">
+                        {{item.title}}
+                    </div>
+                </li>
+            </ul>
+            <!--大图标链接结束-->
+        </div>
+        <!--快速链接结束-->
+        <!--精品新房开始-->
+        <div class="new-house">
+            <div class="title-top">
+                <h2 class="main-title">精品新房</h2>
+                <nuxt-link to="#">
+                    更多新房
+                </nuxt-link>
+            </div>
+            <p class="main-desc">
+                在这里为您寻觅一个新家
+            </p>
+            <ul class="main-content">
+               <li>
+                   <img src="" alt="">
+                   <div class="img-desc-wrap">
+                       <p class="img-desc">
+                           呼和浩特亿利生态城
+                       </p>
+                       <span class="price">
+
+                       </span>
+                   </div>
+               </li>
+            </ul>
+        </div>
+        <!--精品新房结束-->
     </div>
 </template>
+<style lang="scss">
+
+</style>
 
 <script>
     import axios from '~/plugins/axios'
@@ -63,12 +140,15 @@
             let bannerData = await axios.get(api.paramToUrl(api.adLists,{type: 0,position:0}))
             let res = await axios.get(api.regionListCopy)
             let headlineData = await axios.get(api.paramToUrl(api.encyTop, {page_num: 0,page_size:10}))
-            console.log(headlineData)
+            let features = await axios.get(api.linkData)
+            let productData = await axios.get(api.paramToUrl(api.productRecommend, {plat: 2,page_num:1,page_size: 3}))
 
             return {
                 region: res.data.data,
                 banners: bannerData.data.data,
-                headlineData: headlineData.data.datas[0]
+                headlineData: headlineData.data.datas[0],
+                features: features.data.datas,
+                productData: productData.data
             }
         },
         head() {
@@ -132,7 +212,7 @@
             }
         },
         mounted() {
-
+            console.log(this.features)
         },
         computed: {
             placeText() {
@@ -256,4 +336,60 @@
             }
         }
     }
+
+    /*快速链接*/
+    .quick-link {
+        width: 1100px;
+        margin: 0 auto;
+        /*小链接*/
+        .link-wrap {
+            li {
+                padding: 40px 0;
+                width: 275px;
+                box-sizing: border-box;
+                float: left;
+                text-align: center;
+
+                .link-title {
+                    padding: 20px 0 10px;
+                    font-size: 20px;
+                    font-weight: 400;
+                    color: #333;
+                }
+
+                div {
+                    color: #888;
+                    font-size: 14px;
+                }
+            }
+        }
+
+        /*大链接开始*/
+        .features {
+            li {
+                position: relative;
+                float: left;
+                width: 300px;
+                margin-right: 100px;
+                img {
+                    display: block;
+                }
+                &:last-child {
+                    margin-right: 0;
+                }
+                .desc {
+                    position: absolute;
+                    color: #fff;
+                    font-size: 24px;
+                    width: 220px;
+                    top: 140px;
+                    left: 50%;
+                    transform: translateX(-50%);
+                    text-align: center;
+                }
+            }
+        }
+
+    }
+
 </style>

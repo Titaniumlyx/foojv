@@ -111,13 +111,13 @@
         methods: {
             getRegion() {
                 axios.get(api.regionLists).then(res => {
-                    console.log(res)
+                    // console.log(res)
                 })
             }
         },
         mounted() {
             // this.getRegion();
-            console.log(this.regionList)
+            // console.log(this.regionList)
         }
     }
 </script>
