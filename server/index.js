@@ -25,6 +25,13 @@ app.use('/api', proxy({
         "^/api": '/fjw'
     }
 }))
+app.use('/origin', proxy({
+    target: "http://www.fooju.cn/",
+    changeOrigin: true,
+    pathRewrite: {
+        "^/origin": '/'
+    }
+}))
 
 
 

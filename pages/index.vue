@@ -98,35 +98,128 @@
         </div>
         <!--快速链接结束-->
         <!--精品新房开始-->
-        <div class="new-house">
-            <div class="title-top">
-                <h2 class="main-title">精品新房</h2>
-                <nuxt-link to="#">
+        <div class="new-house main-list">
+            <div class="title-top clearfix">
+                <h2 class="main-title fll">精品新房</h2>
+                <nuxt-link to="#" class="more flr" >
                     更多新房
+                    <i class="iconfont icon-mjiantou"></i>
                 </nuxt-link>
             </div>
             <p class="main-desc">
                 在这里为您寻觅一个新家
             </p>
-            <ul class="main-content">
-               <li>
-                   <img src="" alt="">
-                   <div class="img-desc-wrap">
-                       <p class="img-desc">
-                           呼和浩特亿利生态城
+            <ul class="main-content clearfix">
+               <li v-for="(item,index) in productData.new" v-if="index<3">
+                   <img :src="'/origin'+item.pic" alt="">
+                   <div class="img-desc-wrap clearfix">
+                       <p class="img-desc fll">
+                           {{item.title}}
                        </p>
-                       <span class="price">
-
+                       <span class="price flr">
+                            {{item.average_price}}元/平
                        </span>
                    </div>
                </li>
             </ul>
         </div>
+
+        <div class="second-hand main-list">
+            <div class="title-top clearfix">
+                <h2 class="main-title fll">二手优品</h2>
+                <nuxt-link to="#" class="more flr" >
+                    更多二手房
+                    <i class="iconfont icon-mjiantou"></i>
+                </nuxt-link>
+            </div>
+            <p class="main-desc">
+                生活因为宽广，才会不断延伸
+            </p>
+            <ul class="main-content clearfix">
+                <li v-for="(item,index) in productData.used" v-if="index<3">
+                    <img :src="'/origin'+item.pic" alt="">
+                    <div class="img-desc-wrap clearfix">
+                        <p class="img-desc fll">
+                            {{item.title}}
+                        </p>
+                        <span class="price flr">
+                            {{item.total_price}}元/平
+                       </span>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
         <!--精品新房结束-->
     </div>
 </template>
 <style lang="scss">
+    .main-list {
+        width: 1100px;
+        margin: 40px auto 0;
+        .title-top {
+            margin-bottom: 20px;
 
+            .main-title {
+                color: #333;
+                font-size: 30px;
+                font-weight: 700;
+            }
+            .more {
+                font-size: 16px;
+                color: #999;
+            }
+        }
+        .main-desc {
+            font-size: 16px;
+            color: #666;
+            margin-bottom: 40px;
+        }
+        .main-content {
+            li {
+                position: relative;
+                float: left;
+                width: 342px;
+                height: 277px;
+                margin-right: 37px;
+                overflow: hidden;
+                &:last-child {
+                    margin-right: 0;
+                }
+                &:hover img {
+                    transform: scale(1.1);
+                }
+
+                .img-desc-wrap {
+                    position: absolute;
+                    left: 0;
+                    right: 0;
+                    bottom: 0;
+                    width: 100%;
+                    padding: 5px 10px;
+                    box-sizing: border-box;
+                    z-index: 998;
+                    background: rgba(0,0,0, .5);
+                    color: #fff;
+                    font-size: 16px;
+                }
+            }
+        }
+        img {
+            transition: transform ease 1s;
+            cursor: pointer;
+            display: block;
+            width: 342px;
+            height: 277px;
+        }
+    }
 </style>
 
 <script>
@@ -212,7 +305,7 @@
             }
         },
         mounted() {
-            console.log(this.features)
+            console.log(this.productData)
         },
         computed: {
             placeText() {
