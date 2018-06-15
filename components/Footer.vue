@@ -1,5 +1,5 @@
 <template>
-    <footer>
+    <div class="footer">
         <div class="main-link">
             <a href="#">关于我们</a>
             <a href="#">联系方式</a>
@@ -84,12 +84,14 @@
                 </script>
             </div>
         </div>
-    </footer>
+    </div>
 </template>
 
 
 <style scoped lang="scss">
-    footer {
+    .footer {
+        display: block;
+        width: 100%;
         height: 444px;
         padding-top: 60px;
         box-sizing: border-box;

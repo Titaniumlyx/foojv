@@ -4,6 +4,7 @@
             <userTop></userTop>
             <linkNav :regionList="region"></linkNav>
         </header>
+
         <!--banner栏目开始-->
         <div class="content">
             <div class="banner" v-banner>
@@ -200,114 +201,13 @@
         <!--友情链接-->
         <friend-link></friend-link>
         <!--友情链接结束-->
+        <!--右侧浮动框-->
+        <rightBox></rightBox>
+        <!--右侧浮动框结束-->
     </div>
 </template>
 <style lang="scss">
-    .main-list {
-        width: 1100px;
-        margin: 40px auto 0;
-        .title-top {
-            margin-bottom: 20px;
 
-            .main-title {
-                color: #333;
-                font-size: 30px;
-                font-weight: 700;
-            }
-            .more {
-                font-size: 16px;
-                color: #999;
-            }
-        }
-        .main-desc {
-            font-size: 16px;
-            color: #666;
-            margin-bottom: 40px;
-        }
-        .main-content {
-            li {
-                float: left;
-                position: relative;
-                margin-right: 37px;
-
-                .img-wrap {
-                    width: 342px;
-                    height: 277px;
-                    overflow: hidden;
-                }
-
-                &:last-child {
-                    margin-right: 0;
-                }
-                .img-wrap:hover img {
-                    transform: scale(1.1);
-                }
-
-                .img-desc-wrap {
-                    position: absolute;
-                    left: 0;
-                    right: 0;
-                    bottom: 0;
-                    width: 100%;
-                    padding: 5px 10px;
-                    box-sizing: border-box;
-                    z-index: 998;
-                    background: rgba(0,0,0, .5);
-                    color: #fff;
-                    font-size: 16px;
-                }
-
-                .house-msg {
-                    margin-top: 20px;
-                    .address {
-                        margin-bottom: 20px;
-                        font-size: 16px;
-                        color: #333;
-                    }
-                    .area {
-                        font-size: 14px;
-                        color: #666;
-                    }
-                }
-
-                .fll-price {
-                    position: absolute;
-                    left: 0;
-                    top: 10px;
-                    z-index: 1000;
-                    min-width: 70px;
-                    height: 50px;
-                    line-height: 50px;
-                    padding-left: 10px;
-                    padding-right: 20px;
-                    background: url('/imgs/pricetag.png') no-repeat;
-                    background-size: 100% 100%;
-                    font-size: 20px;
-                    color: #fff;
-                }
-                .month-price {
-                    color: #c30d23;
-                }
-            }
-        }
-        img {
-            transition: transform ease 1s;
-            cursor: pointer;
-            display: block;
-            width: 342px;
-            height: 277px;
-        }
-    }
-    .ad-banner {
-        width: 1100px;
-        margin: 40px auto;
-        max-height: 150px;
-        overflow: hidden;
-        img {
-            display: block;
-            width: 100%;
-        }
-    }
 </style>
 
 <script>
@@ -315,6 +215,7 @@
     import userTop from '~/components/index/userTop'
     import linkNav from '~/components/index/linkNav'
     import friendLink from '~/components/index/friendLink'
+    import rightBox from '~/components/index/rightBox'
     import api from '~/api'
 
     export default {
@@ -379,7 +280,8 @@
         components: {
             userTop,
             linkNav,
-            friendLink
+            friendLink,
+            rightBox
         },
         data() {
             return {
@@ -575,4 +477,111 @@
 
     }
 
+    /*主要展示位样式*/
+    .main-list {
+        width: 1100px;
+        margin: 40px auto 0;
+        .title-top {
+            margin-bottom: 20px;
+
+            .main-title {
+                color: #333;
+                font-size: 30px;
+                font-weight: 700;
+            }
+            .more {
+                font-size: 16px;
+                color: #999;
+            }
+        }
+        .main-desc {
+            font-size: 16px;
+            color: #666;
+            margin-bottom: 40px;
+        }
+        .main-content {
+            li {
+                float: left;
+                position: relative;
+                margin-right: 37px;
+
+                .img-wrap {
+                    width: 342px;
+                    height: 277px;
+                    overflow: hidden;
+                }
+
+                &:last-child {
+                    margin-right: 0;
+                }
+                .img-wrap:hover img {
+                    transform: scale(1.1);
+                }
+
+                .img-desc-wrap {
+                    position: absolute;
+                    left: 0;
+                    right: 0;
+                    bottom: 0;
+                    width: 100%;
+                    padding: 5px 10px;
+                    box-sizing: border-box;
+                    z-index: 998;
+                    background: rgba(0,0,0, .5);
+                    color: #fff;
+                    font-size: 16px;
+                }
+
+                .house-msg {
+                    margin-top: 20px;
+                    .address {
+                        margin-bottom: 20px;
+                        font-size: 16px;
+                        color: #333;
+                    }
+                    .area {
+                        font-size: 14px;
+                        color: #666;
+                    }
+                }
+
+                .fll-price {
+                    position: absolute;
+                    left: 0;
+                    top: 10px;
+                    z-index: 1000;
+                    min-width: 70px;
+                    height: 50px;
+                    line-height: 50px;
+                    padding-left: 10px;
+                    padding-right: 20px;
+                    background: url('/imgs/pricetag.png') no-repeat;
+                    background-size: 100% 100%;
+                    font-size: 20px;
+                    color: #fff;
+                }
+                .month-price {
+                    color: #c30d23;
+                }
+            }
+        }
+        img {
+            transition: transform ease 1s;
+            cursor: pointer;
+            display: block;
+            width: 342px;
+            height: 277px;
+        }
+    }
+    .ad-banner {
+        width: 1100px;
+        margin: 40px auto;
+        max-height: 150px;
+        overflow: hidden;
+        img {
+            display: block;
+            width: 100%;
+        }
+    }
+    /*主要展示位样式结束*/
 </style>
