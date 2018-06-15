@@ -11,9 +11,6 @@ input, textarea, select, button { font:14px Verdana,Helvetica,Arial,sans-serif; 
 table { border-collapse:collapse; }
 html {overflow-y: scroll;
     line-height: 1.15;}
-body {
-    background: rgb(242, 242, 242);
-}
 
 .clearfix::after {
     content: "";

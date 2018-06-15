@@ -111,7 +111,9 @@
             </p>
             <ul class="main-content clearfix">
                <li v-for="(item,index) in productData.new" v-if="index<3">
-                   <img :src="'/origin'+item.pic" alt="">
+                   <div class="img-wrap">
+                       <img :src="'/origin'+item.pic" >
+                   </div>
                    <div class="img-desc-wrap clearfix">
                        <p class="img-desc fll">
                            {{item.title}}
@@ -123,7 +125,8 @@
                </li>
             </ul>
         </div>
-
+        <!--精品新房结束-->
+        <!--二手优品开始-->
         <div class="second-hand main-list">
             <div class="title-top clearfix">
                 <h2 class="main-title fll">二手优品</h2>
@@ -137,27 +140,66 @@
             </p>
             <ul class="main-content clearfix">
                 <li v-for="(item,index) in productData.used" v-if="index<3">
-                    <img :src="'/origin'+item.pic" alt="">
-                    <div class="img-desc-wrap clearfix">
-                        <p class="img-desc fll">
+                    <div class="img-wrap">
+                        <img :src="'/origin'+item.pic" alt="">
+                    </div>
+                    <div class="house-msg">
+                        <div class="address">
                             {{item.title}}
-                        </p>
-                        <span class="price flr">
-                            {{item.total_price}}元/平
-                       </span>
+                        </div>
+                        <div class="area">
+                            {{item.bedroom}}室{{item.livingroom}}厅{{item.wc}}卫{{item.built_area}}&nbsp;&nbsp;m²
+                        </div>
+                    </div>
+                    <div class="fll-price">
+                        {{item.total_price}}万
                     </div>
                 </li>
             </ul>
         </div>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <!--精品新房结束-->
+        <!--二手优品结束-->
+        <!--广告栏-->
+        <div class="ad-banner">
+            <img src="/imgs/u764_state0.png" >
+        </div>
+        <!--广告栏结束-->
+        <!--精品租房-->
+        <div class="renting-house main-list">
+            <div class="title-top clearfix">
+                <h2 class="main-title fll">精品租房</h2>
+                <nuxt-link to="#" class="more flr" >
+                    更多租房
+                    <i class="iconfont icon-mjiantou"></i>
+                </nuxt-link>
+            </div>
+            <p class="main-desc">
+                与其等待，不如坐享繁华
+            </p>
+            <ul class="main-content clearfix">
+                <li v-for="(item,index) in productData.retal" v-if="index<3">
+                    <div class="img-wrap">
+                        <img :src="'/origin'+item.pic" alt="">
+                    </div>
+                    <div class="house-msg">
+                        <div class="address">
+                            {{item.title}}
+                        </div>
+                        <div class="area clearfix">
+                            <span class="fll">
+                                 {{item.bedroom}}室{{item.livingroom}}厅{{item.wc}}卫{{item.built_area}}&nbsp;&nbsp;m²
+                            </span>
+                            <span class="month-price flr">
+                                {{item.rent}}元/月
+                            </span>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <!--精品租房结束-->
+        <!--友情链接-->
+        <friend-link></friend-link>
+        <!--友情链接结束-->
     </div>
 </template>
 <style lang="scss">
@@ -184,16 +226,20 @@
         }
         .main-content {
             li {
-                position: relative;
                 float: left;
-                width: 342px;
-                height: 277px;
+                position: relative;
                 margin-right: 37px;
-                overflow: hidden;
+
+                .img-wrap {
+                    width: 342px;
+                    height: 277px;
+                    overflow: hidden;
+                }
+
                 &:last-child {
                     margin-right: 0;
                 }
-                &:hover img {
+                .img-wrap:hover img {
                     transform: scale(1.1);
                 }
 
@@ -210,6 +256,38 @@
                     color: #fff;
                     font-size: 16px;
                 }
+
+                .house-msg {
+                    margin-top: 20px;
+                    .address {
+                        margin-bottom: 20px;
+                        font-size: 16px;
+                        color: #333;
+                    }
+                    .area {
+                        font-size: 14px;
+                        color: #666;
+                    }
+                }
+
+                .fll-price {
+                    position: absolute;
+                    left: 0;
+                    top: 10px;
+                    z-index: 1000;
+                    min-width: 70px;
+                    height: 50px;
+                    line-height: 50px;
+                    padding-left: 10px;
+                    padding-right: 20px;
+                    background: url('/imgs/pricetag.png') no-repeat;
+                    background-size: 100% 100%;
+                    font-size: 20px;
+                    color: #fff;
+                }
+                .month-price {
+                    color: #c30d23;
+                }
             }
         }
         img {
@@ -220,12 +298,23 @@
             height: 277px;
         }
     }
+    .ad-banner {
+        width: 1100px;
+        margin: 40px auto;
+        max-height: 150px;
+        overflow: hidden;
+        img {
+            display: block;
+            width: 100%;
+        }
+    }
 </style>
 
 <script>
     import axios from '~/plugins/axios'
     import userTop from '~/components/index/userTop'
     import linkNav from '~/components/index/linkNav'
+    import friendLink from '~/components/index/friendLink'
     import api from '~/api'
 
     export default {
@@ -289,7 +378,8 @@
         },
         components: {
             userTop,
-            linkNav
+            linkNav,
+            friendLink
         },
         data() {
             return {
