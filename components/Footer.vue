@@ -90,8 +90,6 @@
 
 <style scoped lang="scss">
     .footer {
-        display: block;
-        width: 100%;
         height: 444px;
         padding-top: 60px;
         box-sizing: border-box;

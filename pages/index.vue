@@ -1,5 +1,6 @@
 <template>
     <div v-cloak>
+        <test></test>
         <header>
             <userTop></userTop>
             <linkNav :regionList="region"></linkNav>
@@ -216,7 +217,9 @@
     import linkNav from '~/components/index/linkNav'
     import friendLink from '~/components/index/friendLink'
     import rightBox from '~/components/index/rightBox'
+    import test from '~/demo/test'
     import api from '~/api'
+
 
     export default {
         async asyncData() {
@@ -274,6 +277,9 @@
                     }
                     setBannerHeight()
                    window.addEventListener("resize",setBannerHeight)
+                },
+                unbind(el) {
+                    window.removeEventListener('resize')
                 }
             }
         },
@@ -281,7 +287,8 @@
             userTop,
             linkNav,
             friendLink,
-            rightBox
+            rightBox,
+            test
         },
         data() {
             return {
