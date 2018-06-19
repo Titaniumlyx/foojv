@@ -7,12 +7,12 @@
                 </nuxt-link>
             </h1>
             <div class="select-city" @click="showMark = true"><span>{{selectText}} <i class="iconfont icon-jiantouxia"></i></span></div>
-            <div class="nav clearfix" v-nav>
-                        <span class="nav-item">
+            <div class="nav clearfix">
+                        <span class="nav-item active" >
                             <nuxt-link to="/" target="_blank">首页</nuxt-link>
                         </span>
-                <span class="nav-item">
-                            <a href="secondHandHousingList.html" target="_blank">二手房</a>
+                <span class="nav-item" >
+                            <a href="/secondHand" target="_blank" >二手房</a>
                         </span>
                 <span class="nav-item">
                             <a href="newHouseIndex.html" target="_blank">新房</a>
@@ -51,7 +51,7 @@
                         </span>
             </div>
         </div>
-        <div class="mark" v-show="showMark">
+        <div class="mark" v-show="showMark" @click="showMark = false">
             <div class="select-box">
                 <div class="box-title">
                     <span>选择区县</span>
@@ -59,14 +59,14 @@
                 </div>
                 <div class="select-content clearfix">
                     <div class="current-item">
-                        <span @click="$router.go(0)">{{selectText}}</span>
+                        <span @click="handleChangeArea('呼和浩特')">呼和浩特</span>
                     </div>
                     <ul>
                         <li v-for="item in regionList">
                             <span class="item-char fll">
                                 {{item.key}}
                             </span>
-                            <span class="item-text">
+                            <span class="item-text" @click="handleChangeArea(item.list[0].area)">
                                 {{item.list[0].area}}
                             </span>
                         </li>
@@ -84,18 +84,6 @@
     import api from '~/api'
     export default {
         name: "linkNav",
-        directives: {
-            nav:{
-                inserted(el, binding, vnode){
-                    let spans = [...el.children]
-                    spans.forEach(item => {
-                        if(item.children[0].getAttribute("href") == vnode.context.$route.path){
-                            item.className += " active"
-                        }
-                    })
-                }
-            }
-        },
         props: {
             regionList: {
                 type: Array
@@ -103,25 +91,30 @@
         },
         data() {
             return {
-                showSpinnerContent: false,
                 selectText: "呼和浩特",
                 showMark: false
             }
         },
         methods: {
-            getRegion() {
-                axios.get(api.regionLists).then(res => {
-                    // console.log(res)
-                })
+            handleChangeArea(area) {
+                localStorage.setItem("area", area);
+                this.selectText = area;
+                this.showMark = false;
             }
         },
         mounted() {
-            // this.getRegion();
-            // console.log(this.regionList)
+            let area = localStorage.getItem("area");
+            if(!area){
+                this.selectText = "呼和浩特";
+            }
+            else {
+                this.selectText = area;
+            }
+
         }
     }
 </script>
 
-<style scoped src="~/style/linkNav.scss" lang="scss">
+<style src="~/style/linkNav.scss" lang="scss">
 
 </style>

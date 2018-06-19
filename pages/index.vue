@@ -1,6 +1,5 @@
 <template>
-    <div v-cloak>
-        <test></test>
+    <div>
         <header>
             <userTop></userTop>
             <linkNav :regionList="region"></linkNav>
@@ -12,7 +11,7 @@
                 <div v-swiper:mySwiper="swiperOption" style="height: 100%;overflow: hidden;">
                     <div class="swiper-wrapper">
                         <div class="swiper-slide" v-for="banner in banners">
-                            <img :src="'http://www.fooju.cn/'+banner.picurl">
+                            <img :src="'http://www.fooju.cn/'+banner.picurl" style="display: block;">
                         </div>
                     </div>
                     <div class="swiper-pagination"></div>
@@ -26,16 +25,17 @@
                             <li :class="{active: selectTab==4}" @click="selectTab=4">找学区房</li>
                             <li :class="{active: selectTab==5}" @click="selectTab=5">找小区</li>
                         </ul>
-                        <ul class="search-inputs">
-                            <li class="search-input" style="display: block">
-                                <input type="text" :placeholder="placeText">
-                                <span class="search-btn">搜索</span>
-                                <span class="map-find" v-if="selectTab<4">
-                                    <img src="/imgs/mapSearch.png">
-                                    地图找房
-                                </span>
-                            </li>
-                        </ul>
+                        <div class="search-inputs">
+                            <input type="text" :placeholder="placeText" v-model="searchText">
+                            <span class="search-btn" @click="handleSearch">搜索</span>
+                            <span class="map-find" v-if="selectTab<4">
+                                <img src="/imgs/mapSearch.png">
+                                地图找房
+                            </span>
+                            <ul class="pre-search" v-show="isSearch">
+                                <li v-for="item in searchData" @click="handleFind">{{item.title}}</li>
+                            </ul>
+                        </div>
                     </div>
                     <div class="bottom-slider" style="height: 30px">
                         <div class="headline-wrap" style="float: left;">
@@ -43,8 +43,8 @@
                         </div>
                         <div v-swiper:headlineSwiper="headlineOption" style="line-height: 30px;overflow: hidden;float: left;height: 30px;margin-left: 15px;">
                             <div class="swiper-wrapper">
-                                <div class="swiper-slide" v-for="item in headlineData">
-                                    <p>{{item.title}}</p>
+                                <div class="swiper-slide" v-for="(item,index) in headlineData">
+                                    <nuxt-link to="#" class="swiper-link" key="index">{{item.title}}</nuxt-link>
                                 </div>
                             </div>
                         </div>
@@ -217,7 +217,7 @@
     import linkNav from '~/components/index/linkNav'
     import friendLink from '~/components/index/friendLink'
     import rightBox from '~/components/index/rightBox'
-    import test from '~/demo/test'
+    import imgFit from '~/js/imgFit'
     import api from '~/api'
 
 
@@ -228,7 +228,6 @@
             let headlineData = await axios.get(api.paramToUrl(api.encyTop, {page_num: 0,page_size:10}))
             let features = await axios.get(api.linkData)
             let productData = await axios.get(api.paramToUrl(api.productRecommend, {plat: 2,page_num:1,page_size: 3}))
-
             return {
                 region: res.data.data,
                 banners: bannerData.data.data,
@@ -244,42 +243,13 @@
         },
         directives: {
             "banner": {
-                inserted(el) {
-                    function setBannerHeight() {
-                        let header = document.querySelector("header");
-                        let headerHeight = header.offsetHeight;
-                        let bodyHeight = document.documentElement.clientHeight || document.body.clientHeight;
-                        let bodyWidth = document.documentElement.clientWidth || document.body.clientWidth;
-                        let bannerHeight = bodyHeight - headerHeight;
-                        let imgs = el.querySelectorAll(".swiper-wrapper img");
-                        let bannerRatio = bodyWidth/bannerHeight;
-
-                        el.style.height = bannerHeight + "px";
-                        imgs = Array.from(imgs);
-                        imgs.forEach(item => {
-                            let imgRatio = item.offsetWidth/item.offsetHeight;
-                            if(bannerRatio>imgRatio){
-                                //banner的宽度比例比img的宽度比例大。
-                                item.style.width = bodyWidth + "px";
-                                item.style.height = "auto";
-
-                                item.style.marginTop = (bannerHeight-item.offsetHeight)/2 + "px";
-                                item.style.marginLeft = "0px";
-                            }
-                            else {
-                                item.style.height = bannerHeight + "px";
-                                item.style.width = "auto";
-                                item.style.marginLeft = (bodyWidth-item.offsetWidth)/2 + "px";
-                                item.style.marginTop = "0px";
-                            }
-
-                        })
-                    }
-                    setBannerHeight()
-                   window.addEventListener("resize",setBannerHeight)
+                inserted(el,binding) {
+                    imgFit.dom = el;
+                    imgFit.setBannerHeight();
+                    imgFit.bindHandle();
                 },
-                unbind(el) {
-                    window.removeEventListener('resize')
+                unbind(el,binding) {
+                    imgFit.unbindHandle();
                 }
             }
         },
@@ -287,24 +257,26 @@
             userTop,
             linkNav,
             friendLink,
-            rightBox,
-            test
+            rightBox
         },
         data() {
             return {
                 swiperOption: {
-                    autoplay: true
+                    autoplay: false
                 },
                 selectTab: 1,
                 headlineOption: {
                     autoplay: true,
                     direction: 'vertical',
                     loop: true
-                }
+                },
+                searchData: [],
+                searchText: "",
+                isSearch: false
             }
         },
         mounted() {
-            console.log(this.productData)
+
         },
         computed: {
             placeText() {
@@ -316,279 +288,38 @@
                     case 5: return "输入小区名搜索小区";
                 }
             }
+        },
+        watch: {
+            searchText(val) {
+                if(val.trim()!=""){
+                    this.isSearch = true;
+                    axios.get(api.paramToUrl(api.used_lists, {title: val})).then(res => {
+                        this.searchData = res.data.data;
+                    }).catch(err => {
+                        console.log(err)
+                    })
+                }
+                else {
+                    this.isSearch = false;
+                }
+            }
+        },
+        methods: {
+            handleFind() {
+                console.log('查找')
+            },
+            //点击按钮
+            handleSearch() {
+                let selected = this.selectTab;
+
+                switch(selected){
+                    case 1:
+                        this.$router.push({name: "secondHand",query: {q: this.searchText}})
+                }
+            }
+
         }
     }
 </script>
 
-<style scoped lang="scss">
-    header {
-        background: #fff;
-    }
-
-
-    .content {
-        position: relative;
-    }
-    .swiper-slide {
-        position: relative;
-        overflow: hidden;
-
-        img {
-            width: 100%;
-            margin: 0 auto;
-        }
-    }
-    .banner {
-        position: relative;
-    }
-    .banner::after {
-        content: "";
-        display: block;
-        position: absolute;
-        z-index: 998;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: rgba(0,0,0,.3);
-    }
-
-    .content .banner .banner-search {
-        width: 1100px;
-        position: absolute;
-        bottom: 10px;
-        left: 50%;
-        margin-left: -550px;
-        z-index: 999;
-        font-size: 16px;
-        color: #fff;
-    }
-    .banner .banner-search .active {
-        font-weight: 700;
-    }
-    .banner .banner-search .active::after {
-        content: "";
-        border: 10px solid transparent;
-        border-bottom-color: #fff;
-        position: absolute;
-        bottom: 0;
-        left: 50%;
-        margin-left: -10px;
-    }
-    .banner .banner-search .search-header li{
-        padding-bottom: 30px;
-        position: relative;
-        margin-right: 30px;
-        float: left;
-        cursor: pointer;
-    }
-    .banner .banner-search .search-inputs {
-        li {
-            display: none;
-        }
-        .active {
-            display: block;
-        }
-        input {
-            width: 740px;
-            height: 60px;
-            border-width: 0;
-            padding: 0 0 0 10px;
-            margin-bottom: 70px;
-            border-bottom-left-radius: 3px;
-            border-top-left-radius: 3px;
-            font-size: 100%;
-            outline: none;
-        }
-        .search-btn {
-            border-bottom-right-radius: 3px;
-            border-top-right-radius: 3px;
-            width: 160px;
-            background: #c30d23;
-            margin-left: -5px;
-            height: 60px;
-            display: inline-block;
-            vertical-align: top;
-            text-align: center;
-            line-height: 60px;
-            cursor: pointer;
-        }
-        .map-find {
-            float: right;
-            width: 180px;
-            height: 60px;
-            background: #5f1985;
-            border-radius: 3px;
-            text-align: center;
-            line-height: 60px;
-            img {
-                width: 20px;
-                height: 20px;
-                vertical-align: middle;
-            }
-        }
-    }
-
-    /*快速链接*/
-    .quick-link {
-        width: 1100px;
-        margin: 0 auto;
-        /*小链接*/
-        .link-wrap {
-            li {
-                padding: 40px 0;
-                width: 275px;
-                box-sizing: border-box;
-                float: left;
-                text-align: center;
-
-                .link-title {
-                    padding: 20px 0 10px;
-                    font-size: 20px;
-                    font-weight: 400;
-                    color: #333;
-                }
-
-                div {
-                    color: #888;
-                    font-size: 14px;
-                }
-            }
-        }
-
-        /*大链接开始*/
-        .features {
-            li {
-                position: relative;
-                float: left;
-                width: 300px;
-                margin-right: 100px;
-                img {
-                    display: block;
-                }
-                &:last-child {
-                    margin-right: 0;
-                }
-                .desc {
-                    position: absolute;
-                    color: #fff;
-                    font-size: 24px;
-                    width: 220px;
-                    top: 140px;
-                    left: 50%;
-                    transform: translateX(-50%);
-                    text-align: center;
-                }
-            }
-        }
-
-    }
-
-    /*主要展示位样式*/
-    .main-list {
-        width: 1100px;
-        margin: 40px auto 0;
-        .title-top {
-            margin-bottom: 20px;
-
-            .main-title {
-                color: #333;
-                font-size: 30px;
-                font-weight: 700;
-            }
-            .more {
-                font-size: 16px;
-                color: #999;
-            }
-        }
-        .main-desc {
-            font-size: 16px;
-            color: #666;
-            margin-bottom: 40px;
-        }
-        .main-content {
-            li {
-                float: left;
-                position: relative;
-                margin-right: 37px;
-
-                .img-wrap {
-                    width: 342px;
-                    height: 277px;
-                    overflow: hidden;
-                }
-
-                &:last-child {
-                    margin-right: 0;
-                }
-                .img-wrap:hover img {
-                    transform: scale(1.1);
-                }
-
-                .img-desc-wrap {
-                    position: absolute;
-                    left: 0;
-                    right: 0;
-                    bottom: 0;
-                    width: 100%;
-                    padding: 5px 10px;
-                    box-sizing: border-box;
-                    z-index: 998;
-                    background: rgba(0,0,0, .5);
-                    color: #fff;
-                    font-size: 16px;
-                }
-
-                .house-msg {
-                    margin-top: 20px;
-                    .address {
-                        margin-bottom: 20px;
-                        font-size: 16px;
-                        color: #333;
-                    }
-                    .area {
-                        font-size: 14px;
-                        color: #666;
-                    }
-                }
-
-                .fll-price {
-                    position: absolute;
-                    left: 0;
-                    top: 10px;
-                    z-index: 1000;
-                    min-width: 70px;
-                    height: 50px;
-                    line-height: 50px;
-                    padding-left: 10px;
-                    padding-right: 20px;
-                    background: url('/imgs/pricetag.png') no-repeat;
-                    background-size: 100% 100%;
-                    font-size: 20px;
-                    color: #fff;
-                }
-                .month-price {
-                    color: #c30d23;
-                }
-            }
-        }
-        img {
-            transition: transform ease 1s;
-            cursor: pointer;
-            display: block;
-            width: 342px;
-            height: 277px;
-        }
-    }
-    .ad-banner {
-        width: 1100px;
-        margin: 40px auto;
-        max-height: 150px;
-        overflow: hidden;
-        img {
-            display: block;
-            width: 100%;
-        }
-    }
-    /*主要展示位样式结束*/
-</style>
+<style scoped lang="scss" src="~/style/index.scss"></style>

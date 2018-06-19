@@ -55,7 +55,7 @@
             getData() {
                 axios.get(api.bottomLists).then(res => {
                     this.links = res.data.data;
-                    console.log(this.links)
+                    // console.log(this.links)
                 })
             }
         },

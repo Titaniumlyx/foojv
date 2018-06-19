@@ -32,12 +32,15 @@
   float: right;
   span {
     float: left;
-    padding-left: 30px;
+    padding-left: 35px;
   }
 
   .spinner {
     &:hover .spinner-content{
     display: block;
+      a:hover {
+        color: #c30d23;
+      }
   }
     position: relative;
     .spinner-content {
@@ -63,6 +66,7 @@
   color: #c30d23;
 }
 .nav-item:hover>a {
+  color: #c30d23;
   border-bottom: 2px solid #c30d23;
 }
 .nav .active>a {

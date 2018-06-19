@@ -1,10 +1,10 @@
 <template>
     <div class="user-top">
         <span class="login">
-            <a href="javascript:;">请登录</a>
+            <nuxt-link to="/login" href="javascript:;">请登录</nuxt-link>
         </span>
         <span class="register">
-            <a href="javascript:;">立即注册</a>
+            <nuxt-link to="/register" href="javascript:;">立即注册</nuxt-link>
         </span>
     </div>
 </template>
