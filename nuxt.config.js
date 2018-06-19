@@ -16,7 +16,7 @@ module.exports = {
     /*
     ** Global CSS
     */
-    css: ['~/assets/css/main.css', '~/assets/css/iconfont.css'],
+    css: ['~/assets/css/main.css', '~/assets/css/iconfont.css', 'element-ui/lib/theme-chalk/index.css'],
     /*
     ** Add axios globally
     */
@@ -38,5 +38,5 @@ module.exports = {
             }
         }
     },
-    plugins: [{src: "~/plugins/vue-awesome-swiper", ssr: false}]
+    plugins: [{src: "~/plugins/vue-awesome-swiper", ssr: false}, {src: "~/plugins/element-ui"}]
 }
