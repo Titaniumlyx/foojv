@@ -14,7 +14,6 @@
                             <img :src="'http://www.fooju.cn/'+banner.picurl" style="display: block;">
                         </div>
                     </div>
-                    <div class="swiper-pagination"></div>
                 </div>
                 <div class="banner-search">
                     <div class="search-tab">
