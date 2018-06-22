@@ -1,18 +1,18 @@
 <template>
     <div class="transitionBox">
-        <div class="default-box">
+        <div class="default-box clearfix">
             <slot>
             </slot>
         </div>
 
         <div class="transition-middle">
-            <div class="box" v-tab style="height: 0">
+            <div class="box clearfix" v-tab style="height: 0">
                 <slot name="middle">
                 </slot>
             </div>
         </div>
         <slot name="bottom">
-
+            <h3>最底下的内容</h3>
         </slot>
 
         <div class="tab-wrap">

@@ -19,7 +19,19 @@
         <div class="filter-box">
             <filterBox>
                 <template>
-                    
+                    <!--区域-->
+                    <span class="title">
+                        区域
+                    </span>
+                    <el-checkbox-group v-model="formData.r_id">
+                        <el-checkbox v-for="(item,index) in regionData" :key="index" :label="item.id">
+                            {{item.area}}
+                        </el-checkbox>
+                    </el-checkbox-group>
+                    <!--区域-->
+                    <!--价格选择-->
+                    <span class="title">价格</span>
+                    <!--价格选择结束-->
                 </template>
                 <template slot="bottom">
 
@@ -34,19 +46,14 @@
 </template>
 
 <style lang="scss" scoped>
-    header {
-        height: 60px;
-        background: #f1f1f1;
-    }
-
-    .breadcrumb-wrap {
-        width: 1100px;
-        margin: 20px auto 0;
-
-    }
     .filter-box {
-        width: 1100px;
-        margin: 0 auto;
+        .title {
+            font-size: 14px;
+            color: #333;
+            float: left;
+            width: 96px;
+            font-weight: 400;
+        }
     }
 </style>
 
@@ -68,15 +75,19 @@
             }
         },
         async asyncData() {
-            let regionData = await axios.get(api.regionListCopy)
-
+            let regionData = await axios.get(api.paramToUrl(api.regionLists, {city: "呼和浩特"})).catch(err => {
+                console.log(err)
+            })
+            console.log(regionData)
             return {
-                regionData: regionData.data
+                regionData: regionData.data.data
             }
         },
         data() {
             return {
-                checkList: []
+                formData: {
+                    r_id: []
+                }
             }
         },
         components: {
@@ -89,3 +100,20 @@
     }
 
 </script>
+
+<style lang="scss" scoped>
+    header {
+        height: 60px;
+        background: #f1f1f1;
+    }
+
+    .breadcrumb-wrap {
+        width: 1100px;
+        margin: 20px auto 0;
+
+    }
+    .filter-box {
+        width: 1100px;
+        margin: 30px auto 0;
+    }
+</style>

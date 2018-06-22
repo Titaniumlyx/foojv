@@ -16,7 +16,12 @@ module.exports = {
     /*
     ** Global CSS
     */
-    css: ['~/assets/css/main.css', '~/assets/css/iconfont.css', 'element-ui/lib/theme-chalk/index.css'],
+    css: [
+        '~/assets/css/main.css',
+        '~/assets/css/iconfont.css',
+        'element-ui/lib/theme-chalk/index.css',
+        '~/assets/css/overwrite.scss'
+    ],
     /*
     ** Add axios globally
     */
