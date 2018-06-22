@@ -6,7 +6,6 @@ let options = {
     timeout: 5000,
     headers: {"Content-Type": "application/x-www-form-urlencoded"}
 }
-
 let xhr = {
     get(url, params) {
         return new Promise((resolve, reject) => {

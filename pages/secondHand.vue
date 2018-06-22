@@ -19,18 +19,7 @@
         <div class="filter-box">
             <filterBox>
                 <template>
-                    <div class="r-id">
-                        <div class="title">
-                            区域
-                        </div>
-                        <el-checkbox-group v-model="checkList">
-                            <el-checkbox label="复选框 A"></el-checkbox>
-                            <el-checkbox label="复选框 B"></el-checkbox>
-                            <el-checkbox label="复选框 C"></el-checkbox>
-                            <el-checkbox label="禁用" disabled></el-checkbox>
-                            <el-checkbox label="选中且禁用" disabled></el-checkbox>
-                        </el-checkbox-group>
-                    </div>
+                    
                 </template>
                 <template slot="bottom">
 
