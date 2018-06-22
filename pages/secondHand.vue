@@ -19,19 +19,27 @@
         <div class="filter-box">
             <filterBox>
                 <template>
-                    <!--区域-->
-                    <span class="title">
+                    <div class="region clearfix">
+                        <!--区域-->
+                        <span class="title">
                         区域
                     </span>
-                    <el-checkbox-group v-model="formData.r_id">
-                        <el-checkbox v-for="(item,index) in regionData" :key="index" :label="item.id">
-                            {{item.area}}
-                        </el-checkbox>
-                    </el-checkbox-group>
-                    <!--区域-->
-                    <!--价格选择-->
-                    <span class="title">价格</span>
-                    <!--价格选择结束-->
+                        <el-checkbox-group v-model="formData.r_id" class="fll">
+                            <el-checkbox v-for="(item,index) in regionData" :key="index" :label="item.id">
+                                {{item.area}}
+                            </el-checkbox>
+                        </el-checkbox-group>
+                        <!--区域-->
+                    </div>
+                    <div class="price clearfix mt20">
+                        <!--价格选择-->
+                        <span class="title">价格</span>
+                        <!--价格选择结束-->
+                        <el-checkbox-group v-model="formData.total_price">
+                            <el-checkbox v-for="item in priceData" :key="item.id" :label="item.id">{{item.title}}</el-checkbox>
+                        </el-checkbox-group>
+                    </div>
+
                 </template>
                 <template slot="bottom">
 
@@ -86,8 +94,31 @@
         data() {
             return {
                 formData: {
-                    r_id: []
-                }
+                    r_id: [],
+                    total_price: []
+                },
+                priceData: [
+                    {
+                        title: "不限",
+                        id: 0
+                    },
+                    {
+                        title: "30万以下",
+                        id: 1
+                    },
+                    {
+                        title: "30-40万",
+                        id: 2
+                    },
+                    {
+                        title: "40-50万",
+                        id: 3
+                    },
+                    {
+                        title: "50万以上",
+                        id: 4
+                    }
+                ]
             }
         },
         components: {
