@@ -11,26 +11,29 @@
             </el-breadcrumb>
         </div>
 
+        <!--搜索框-->
+        <search></search>
+        <!--搜索框结束-->
+
         <!--筛选盒子-->
         <div class="filter-box">
             <filterBox>
                 <template>
-                    <h2>顶部盒子</h2>
-                    <h2>顶部盒子</h2>
-                    <h2>顶部盒子</h2>
-                    <h2>顶部盒子</h2>
+                    <div class="r-id">
+                        <div class="title">
+                            区域
+                        </div>
+                        <el-checkbox-group v-model="checkList">
+                            <el-checkbox label="复选框 A"></el-checkbox>
+                            <el-checkbox label="复选框 B"></el-checkbox>
+                            <el-checkbox label="复选框 C"></el-checkbox>
+                            <el-checkbox label="禁用" disabled></el-checkbox>
+                            <el-checkbox label="选中且禁用" disabled></el-checkbox>
+                        </el-checkbox-group>
+                    </div>
                 </template>
                 <template slot="bottom">
-                    <h3>我是内容</h3>
-                    <h3>我是内容</h3>
-                    <h3>我是内容</h3>
-                    <h3>我是内容</h3>
-                    <h3>我是内容</h3>
-                    <h3>我是内容</h3>
-                    <h3>我是内容</h3>
-                    <h3>我是内容</h3>
-                    <h3>我是内容</h3>
-                    <h3>我是内容</h3>
+
                 </template>
             </filterBox>
         </div>
@@ -64,6 +67,9 @@
     import friendlyLink from '~/components/index/friendLink'
     import logoLink from '~/components/secondHand/logo-link'
     import filterBox from '~/components/filter-box'
+    import search from '~/components/secondHand/search'
+    import axios from '~/plugins/axios'
+    import api from '~/api'
 
     export default {
         name: "secondHand",
@@ -72,11 +78,24 @@
                 title: "福居网二手房"
             }
         },
+        async asyncData() {
+            let regionData = await axios.get(api.regionListCopy)
+
+            return {
+                regionData: regionData.data
+            }
+        },
+        data() {
+            return {
+                checkList: []
+            }
+        },
         components: {
             friendlyLink,
             topLinks,
             logoLink,
-            filterBox
+            filterBox,
+            search
         }
     }
 

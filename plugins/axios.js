@@ -13,7 +13,7 @@ let xhr = {
             axios.create(options).get(url, {params}).then(res => {
                 resolve(res)
             }).catch(err => {
-                console.log(err)
+                // console.log(err)
                 reject(err)
             })
         })
@@ -23,7 +23,7 @@ let xhr = {
             axios.create(options).post(url, params).then(res => {
                 resolve(res)
             }).catch(err => {
-                console.log(err)
+                // console.log(err)
             })
         })
     }

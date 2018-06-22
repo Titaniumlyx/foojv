@@ -1,7 +1,7 @@
 <template>
   <div>
     <nuxt/>
-    <vFooter></vFooter>
+    <!--<vFooter></vFooter>-->
   </div>
 </template>
 
@@ -9,7 +9,7 @@
   import vFooter from '~/components/Footer'
 export default {
   components: {
-    vFooter
+    // vFooter
   }
 }
 </script>
