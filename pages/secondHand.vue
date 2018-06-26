@@ -26,7 +26,7 @@
                     </span>
                         <el-checkbox class="fll" style="margin-right: 30px;" @change="handleClear('r_id')" v-model="isChecked.r_id">不限</el-checkbox>
                         <el-checkbox-group v-model="formData.r_id" class="fll"  data-key="r_id" @change="handleChange('r_id')">
-                            <el-checkbox v-for="(item,index) in fillData2.r_idData" :key="index" :label="item.id">
+                            <el-checkbox v-for="(item,index) in fillData2.r_idData" :key="index" :label="item">
                                 {{item.title}}
                             </el-checkbox>
                         </el-checkbox-group>
@@ -38,7 +38,7 @@
                         <!--价格选择结束-->
                         <el-checkbox class="fll" style="margin-right: 30px;" @change="handleClear('total_price')" v-model="isChecked.total_price">不限</el-checkbox>
                         <el-checkbox-group v-model="formData.total_price" @change="handleChange('total_price')">
-                            <el-checkbox v-for="item in fillData.total_priceData" :key="item.id" :label="item.id">{{item.title}}
+                            <el-checkbox v-for="item in fillData.total_priceData" :key="item.id" :label="item">{{item.title}}
                             </el-checkbox>
                         </el-checkbox-group>
                     </div>
@@ -56,7 +56,7 @@
                     <div class="house-type mt-20">
                         <span class="title">户型</span>
                         <el-checkbox-group v-model="formData.bedroom" class="fll">
-                            <el-checkbox v-for="item in fillData.bedroomData" :key="item.id" :label="item.id">{{item.title}}
+                            <el-checkbox v-for="item in fillData.bedroomData" :key="item.id" :label="item">{{item.title}}
                             </el-checkbox>
                         </el-checkbox-group>
                     </div>
@@ -67,7 +67,7 @@
                     <div class="type mt-20">
                         <span class="title">类型</span>
                         <el-checkbox-group v-model="formData.type">
-                            <el-checkbox v-for="item in fillData.typeData" :key="item.id" :label="item.id">{{item.title}}
+                            <el-checkbox v-for="item in fillData.typeData" :key="item.id" :label="item">{{item.title}}
                             </el-checkbox>
                         </el-checkbox-group>
 
@@ -77,7 +77,7 @@
                             装修
                         </span>
                         <el-checkbox-group v-model="formData.decoration">
-                            <el-checkbox v-for="item in fillData.decorationData" :key="item.id" :label="item.id">{{item.title}}
+                            <el-checkbox v-for="item in fillData.decorationData" :key="item.id" :label="item">{{item.title}}
                             </el-checkbox>
                         </el-checkbox-group>
                     </div>
@@ -86,7 +86,7 @@
                             朝向
                         </span>
                         <el-checkbox-group v-model="formData.direction">
-                            <el-checkbox v-for="item in fillData.directionData" :key="item.id" :label="item.id">{{item.title}}
+                            <el-checkbox v-for="item in fillData.directionData" :key="item.id" :label="item">{{item.title}}
                             </el-checkbox>
                         </el-checkbox-group>
                     </div>
@@ -95,7 +95,7 @@
                             楼龄
                         </span>
                         <el-checkbox-group v-model="formData.built_area">
-                            <el-checkbox v-for="item in fillData.built_areaData" :key="item.id" :label="item.id">{{item.title}}
+                            <el-checkbox v-for="item in fillData.built_areaData" :key="item.id" :label="item">{{item.title}}
                             </el-checkbox>
                         </el-checkbox-group>
                     </div>
@@ -105,7 +105,7 @@
                             楼层
                         </span>
                         <el-checkbox-group v-model="formData.floor_type">
-                            <el-checkbox v-for="item in fillData.floor_typeData" :key="item.id" :label="item.id">{{item.title}}
+                            <el-checkbox v-for="item in fillData.floor_typeData" :key="item.id" :label="item">{{item.title}}
                             </el-checkbox>
                         </el-checkbox-group>
                     </div>
@@ -115,7 +115,7 @@
                             电梯
                         </span>
                         <el-checkbox-group v-model="formData.dianti">
-                            <el-checkbox v-for="item in fillData.diantiData" :key="item.id" :label="item.id">{{item.title}}
+                            <el-checkbox v-for="item in fillData.diantiData" :key="item.id" :label="item">{{item.title}}
                             </el-checkbox>
                         </el-checkbox-group>
                     </div>
@@ -233,19 +233,19 @@
                     total_priceData: [
                         {
                             title: "30万以下",
-                            id: 1
+                            id: '0-30'
                         },
                         {
                             title: "30-40万",
-                            id: 2
+                            id: '30-40'
                         },
                         {
                             title: "40-50万",
-                            id: 3
+                            id: '40-50'
                         },
                         {
                             title: "50万以上",
-                            id: 4
+                            id: '50-99999'
                         }
                     ],
                     bedroomData: [
@@ -321,28 +321,33 @@
             handleCustom() {
 
             },
-            //是否选择不限制
+            //不限制之后清空所选的数组
             handleClear(key){
-                this.formData[key] = [];
+                if(this.isChecked[key]){
+                    this.formData[key].splice(0);
+                }
             },
-            //选择后清空不限制选框
+            //选择后条件后调整不限制复选框的选中与否
             handleChange(val) {
                 if(this.formData[val].length>0){
                     this.isChecked[val] = false;
                 }
+                else {
+                    this.isChecked[val] = true;
+                }
             },
-            //点击清除已选中的条件
+            //点击清除所有选择中已选中的单个条件
             handleReduce(item) {
                 let index = this.formData[item._parentName].findIndex(val => val == item.id);
                 this.formData[item._parentName].splice(index,1)
             },
             //清除所有选中条件
             handleClearAll() {
-                console.log('handle')
                 let formData = this.formData;
                 for(let arr in formData){
                     if(formData[arr] instanceof Array){
                         formData[arr].splice(0);
+                        this.handleChange(arr);
                     }
                 }
             },
@@ -358,7 +363,7 @@
 
                 for(let key in formData){
                     if(formData[key].length>0){
-                        params[key] = formData[key]
+                        params[key] = formData[key].map(item => item.id)
                     }
                 }
                 axios.get(api.paramToUrl(api.used_lists,params)).then(res => {
@@ -371,29 +376,36 @@
         computed: {
             selectedData() {
                 let formData = this.formData;
-                let fillData = this.fillData;
                 let allData = [];
+                // for(let key in formData){
+                //     if(formData[key] instanceof  Array&&formData[key].length>0){
+                //         let selectedArr = [];
+                //         let selectKey = `${key}Data`;
+                //         selectedArr.push.apply(selectedArr,formData[key]);
+                //         selectedArr.forEach(item => {
+                //             if(fillData[selectKey]){
+                //                 let obj = {};
+                //                 obj = fillData[selectKey].find((itemObj,index) => itemObj.id == item)
+                //                 obj._parentName = key;
+                //                 allData.push(obj);
+                //             }
+                //             else {
+                //                 let obj = {};
+                //                 let objIndex = "";
+                //                 obj = this.fillData2[selectKey].find((itemObj,index) => itemObj.id == item);
+                //                 obj._parentName = key;
+                //                 allData.push(obj);
+                //             }
+                //
+                //         })
+                //     }
+                // }
                 for(let key in formData){
-                    if(formData[key] instanceof  Array&&formData[key].length>0){
-                        let selectedArr = [];
-                        let selectKey = `${key}Data`;
-                        selectedArr.push.apply(selectedArr,formData[key]);
-                        selectedArr.forEach(item => {
-                            if(fillData[selectKey]){
-                                let obj = {};
-                                obj = fillData[selectKey].find((itemObj,index) => itemObj.id == item)
-                                obj._parentName = key;
-                                allData.push(obj);
-                            }
-                            else {
-                                let obj = {};
-                                let objIndex = "";
-                                obj = this.fillData2[selectKey].find((itemObj,index) => itemObj.id == item);
-                                obj._parentName = key;
-                                allData.push(obj);
-                            }
-
+                    if(formData[key] instanceof Array){
+                        formData[key].map(item => {
+                            item._parentName = key;
                         })
+                        allData.push(...formData[key]);
                     }
                 }
                 this.getData();
