@@ -36,7 +36,8 @@
                         <span class="title">价格</span>
                         <!--价格选择结束-->
                         <el-checkbox-group v-model="formData.total_price">
-                            <el-checkbox v-for="item in priceData" :key="item.id" :label="item.id">{{item.title}}</el-checkbox>
+                            <el-checkbox v-for="item in priceData" :key="item.id" :label="item.id">{{item.title}}
+                            </el-checkbox>
                         </el-checkbox-group>
                     </div>
                     <div class="custom-price clearfix mt-20">
@@ -53,16 +54,78 @@
                     <div class="house-type mt-20">
                         <span class="title">户型</span>
                         <el-checkbox-group v-model="formData.bedroom">
-                            <el-checkbox v-for="item in bedroomData" :key="item.id" :label="item.id">{{item.title}}</el-checkbox>
+                            <el-checkbox v-for="item in bedroomData" :key="item.id" :label="item.id">{{item.title}}
+                            </el-checkbox>
                         </el-checkbox-group>
                     </div>
                     <!--户型结束-->
+                </template>
+
+                <template slot="middle">
                     <div class="type mt-20">
                         <span class="title">类型</span>
                         <el-checkbox-group v-model="formData.type">
-                            <el-checkbox v-for="item in typeData"></el-checkbox>
+                            <el-checkbox v-for="item in typeData" :key="item.id" :label="item.id">{{item.title}}
+                            </el-checkbox>
                         </el-checkbox-group>
 
+                    </div>
+                    <div class="Decoration mt-20">
+                        <span class="title">
+                            装修
+                        </span>
+                        <el-checkbox-group v-model="formData.decoration">
+                            <el-checkbox v-for="item in decorationData" :key="item.id" :label="item.id">{{item.title}}
+                            </el-checkbox>
+                        </el-checkbox-group>
+                    </div>
+                    <div class="directive mt-20">
+                        <span class="title">
+                            朝向
+                        </span>
+                        <el-checkbox-group v-model="formData.direction">
+                            <el-checkbox v-for="item in directionData" :key="item.id" :label="item.id">{{item.title}}
+                            </el-checkbox>
+                        </el-checkbox-group>
+                    </div>
+                    <div class="area mt-20">
+                        <span class="title">
+                            楼龄
+                        </span>
+                        <el-checkbox-group v-model="formData.built_area">
+                            <el-checkbox v-for="item in built_areaData" :key="item.id" :label="item.id">{{item.title}}
+                            </el-checkbox>
+                        </el-checkbox-group>
+                    </div>
+
+                    <div class="area mt-20">
+                        <span class="title">
+                            楼层
+                        </span>
+                        <el-checkbox-group v-model="formData.floor_type">
+                            <el-checkbox v-for="item in floor_typeData" :key="item.id" :label="item.id">{{item.title}}
+                            </el-checkbox>
+                        </el-checkbox-group>
+                    </div>
+
+                    <div class="area mt-20">
+                        <span class="title">
+                            电梯
+                        </span>
+                        <el-checkbox-group v-model="formData.dianti">
+                            <el-checkbox v-for="item in diantiData" :key="item.id" :label="item.id">{{item.title}}
+                            </el-checkbox>
+                        </el-checkbox-group>
+                    </div>
+
+                    <div class="area mt-20">
+                        <span class="title">
+                            其他
+                        </span>
+                        <el-checkbox-group v-model="formData.dianti">
+                            <el-checkbox v-for="item in diantiData" :key="item.id" :label="item.id">{{item.title}}
+                            </el-checkbox>
+                        </el-checkbox-group>
                     </div>
 
                 </template>
@@ -100,7 +163,7 @@
             input:first-child {
                 margin-left: 0;
             }
-            .split,.units {
+            .split, .units {
                 margin-left: 8px;
             }
             .custom-btn {
@@ -152,9 +215,14 @@
                     maxPrice: "",
                     type: [],
                     decoration: [],
+                    direction: [],
                     built_area: [],
                     minCustom_bulit_area: "",
                     maxCustom_bulit_area: "",
+                    dianti: "",
+                    age: "",
+                    floor_type: [],
+                    search: ""
 
                 },
                 priceData: [
@@ -180,41 +248,58 @@
                     }
                 ],
                 bedroomData: [
-                    {title: "一室",id: 0},
-                    {title: "两室",id: 1},
-                    {title: "三室",id: 2},
-                    {title: "四室",id: 3},
-                    {title: "五室",id: 4}
+                    {title: "一室", id: 0},
+                    {title: "两室", id: 1},
+                    {title: "三室", id: 2},
+                    {title: "四室", id: 3},
+                    {title: "五室", id: 4}
                 ],
                 typeData: [
-                    {title: '平层',id: 0},
-                    {title: '复式',id: 1},
-                    {title: '跃层',id: 2}
+                    {title: '平层', id: 0},
+                    {title: '复式', id: 1},
+                    {title: '跃层', id: 2}
                 ],
                 decorationData: [
-                    {title: '平层',id: 0},
-                    {title: '复式',id: 1},
-                    {title: '跃层',id: 2}
+                    {title: '毛坯', id: 0},
+                    {title: '豪装', id: 1},
+                    {title: '精装', id: 2},
+                    {title: '简装', id: 3},
+                    {title: '中装', id: 4}
                 ],
                 directionData: [
-                    {title: '东',id: 0},
-                    {title: '西',id: 1},
-                    {title: '南',id: 2},
-                    {title: '北',id: 3},
-                    {title: '南北',id: 4},
-                    {title: '西南',id: 5},
-                    {title: '东北',id: 6},
-                    {title: '东北',id: 7},
-                    {title: '西北',id: 8},
-                    {title: '东西',id: 9}
+                    {title: '东', id: 0},
+                    {title: '西', id: 1},
+                    {title: '南', id: 2},
+                    {title: '北', id: 3},
+                    {title: '南北', id: 4},
+                    {title: '西南', id: 5},
+                    {title: '东北', id: 6},
+                    {title: '东北', id: 7},
+                    {title: '西北', id: 8},
+                    {title: '东西', id: 9}
                 ],
                 built_areaData: [
-                    {title: '不限',id: 0},
-                    {title: '50平以下',id: 1},
-                    {title: '50-70平',id: 2},
-                    {title: '70-90平',id: 3},
-                    {title: '90以上',id: 4}
+                    {title: '不限', id: 0},
+                    {title: '50平以下', id: 1},
+                    {title: '50-70平', id: 2},
+                    {title: '70-90平', id: 3},
+                    {title: '90以上', id: 4}
                 ],
+                diantiData: [{id: 0, title: '是'}, {id: 1, title: '否'}],
+                ageData: [
+                    {id: 0, title: '不限'},
+                    {id: 1, title: '5年以内'},
+                    {id: 2, title: '10年以内'},
+                    {id: 3, title: '15年以内'},
+                    {id: 4, title: '15年以上'}
+                ],
+                floor_typeData: [
+                    {id: 0, title: "不限"},
+                    {id: 1, title: "底层"},
+                    {id: 2, title: "低楼层"},
+                    {id: 3, title: "中层"},
+                    {id: 4, title: "中高层"},
+                ]
             }
         },
         components: {
@@ -244,6 +329,7 @@
         margin: 20px auto 0;
 
     }
+
     .filter-box {
         width: 1100px;
         margin: 30px auto 0;

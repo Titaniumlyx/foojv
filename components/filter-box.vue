@@ -1,12 +1,12 @@
 <template>
-    <div class="transitionBox">
+    <div class="transitionBox"  v-tab>
         <div class="default-box clearfix">
             <slot>
             </slot>
         </div>
 
         <div class="transition-middle">
-            <div class="box clearfix" v-tab style="height: 0">
+            <div class="box clearfix" style="height: 0" id="middle-box">
                 <slot name="middle">
                 </slot>
             </div>
@@ -16,8 +16,8 @@
         </slot>
 
         <div class="tab-wrap">
-            <span v-show="!showMore" @click="handleShow(true)">更多选项</span>
-            <span v-show="showMore" @click="handleShow(false)">收起选项</span>
+            <span v-show="!showMore"  class="flex-btn" id="more" @click="handleShow(true)">更多选项 <i class="iconfont icon-jiantouxia"></i></span>
+            <span v-show="showMore"  class="flex-btn" id="retract" @click="handleShow(false)">收起选项 <i class="iconfont icon-jiantoushang"></i></span>
         </div>
 
     </div>
@@ -33,25 +33,48 @@
         },
         directives: {
             tab: {
-                update(el,binding,vnode){
-                    let isShow = vnode.context.$data.showMore;
-                    if(isShow){
-                        if(!window.getComputedStyle){
-                            return
-                        }
-                        el.style.height = "auto";
-                        let targetHeight = getComputedStyle(el).height;
-                        el.style.height = "0px";
-                        el.offsetHeight; //触发浏览器重排
-                        el.style.height = targetHeight;
+                inserted(el,binding,vnode){
+                    let moreBtn = el.querySelector("#more");
+                    let retractBtn = el.querySelector("#retract");
+                    let box = el.querySelector("#middle-box")
 
-                    }
-                    else {
+                    moreBtn.onclick = function() {
+                        console.log(1)
                         if(!window.getComputedStyle){
                             return
                         }
-                        el.style.height = 0;
+                        box.style.height = "auto";
+                        let targetHeight = getComputedStyle(box).height;
+                        box.style.height = "0px";
+                        box.offsetHeight; //触发浏览器重排
+                        box.style.height = targetHeight;
                     }
+                    retractBtn.onclick = function() {
+                        console.log(2)
+
+                        if(!window.getComputedStyle){
+                            return
+                        }
+                        box.style.height = 0;
+                    }
+                    // let isShow = vnode.context.$data.showMore;
+                    // if(isShow){
+                    //     if(!window.getComputedStyle){
+                    //         return
+                    //     }
+                    //     el.style.height = "auto";
+                    //     let targetHeight = getComputedStyle(el).height;
+                    //     el.style.height = "0px";
+                    //     el.offsetHeight; //触发浏览器重排
+                    //     el.style.height = targetHeight;
+                    //
+                    // }
+                    // else {
+                    //     if(!window.getComputedStyle){
+                    //         return
+                    //     }
+                    //     el.style.height = 0;
+                    // }
                 }
             }
         },
@@ -67,5 +90,13 @@
     .box {
         transition: height ease .5s;
         overflow: hidden;
+    }
+    .flex-btn {
+        display: block;
+        text-align: center;
+        font-size: 16px;
+        color: #bbb;
+        padding: 30px 0;
+        border-bottom: 1px solid #ccc;
     }
 </style>
