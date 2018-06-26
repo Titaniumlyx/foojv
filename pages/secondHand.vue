@@ -377,29 +377,6 @@
             selectedData() {
                 let formData = this.formData;
                 let allData = [];
-                // for(let key in formData){
-                //     if(formData[key] instanceof  Array&&formData[key].length>0){
-                //         let selectedArr = [];
-                //         let selectKey = `${key}Data`;
-                //         selectedArr.push.apply(selectedArr,formData[key]);
-                //         selectedArr.forEach(item => {
-                //             if(fillData[selectKey]){
-                //                 let obj = {};
-                //                 obj = fillData[selectKey].find((itemObj,index) => itemObj.id == item)
-                //                 obj._parentName = key;
-                //                 allData.push(obj);
-                //             }
-                //             else {
-                //                 let obj = {};
-                //                 let objIndex = "";
-                //                 obj = this.fillData2[selectKey].find((itemObj,index) => itemObj.id == item);
-                //                 obj._parentName = key;
-                //                 allData.push(obj);
-                //             }
-                //
-                //         })
-                //     }
-                // }
                 for(let key in formData){
                     if(formData[key] instanceof Array){
                         formData[key].map(item => {
