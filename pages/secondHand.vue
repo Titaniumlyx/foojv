@@ -24,8 +24,11 @@
                         <span class="title">
                         区域
                     </span>
-                        <el-checkbox class="fll" style="margin-right: 30px;" @change="handleClear('r_id')" v-model="isChecked.r_id">不限</el-checkbox>
-                        <el-checkbox-group v-model="formData.r_id" class="fll"  data-key="r_id" @change="handleChange('r_id')">
+                        <el-checkbox class="fll" style="margin-right: 30px;" @change="handleClear('r_id')"
+                                     v-model="isChecked.r_id">不限
+                        </el-checkbox>
+                        <el-checkbox-group v-model="formData.r_id" class="fll" data-key="r_id"
+                                           @change="handleChange('r_id')">
                             <el-checkbox v-for="(item,index) in fillData2.r_idData" :key="index" :label="item">
                                 {{item.title}}
                             </el-checkbox>
@@ -36,9 +39,12 @@
                         <!--价格选择-->
                         <span class="title">价格</span>
                         <!--价格选择结束-->
-                        <el-checkbox class="fll" style="margin-right: 30px;" @change="handleClear('total_price')" v-model="isChecked.total_price">不限</el-checkbox>
+                        <el-checkbox class="fll" style="margin-right: 30px;" @change="handleClear('total_price')"
+                                     v-model="isChecked.total_price">不限
+                        </el-checkbox>
                         <el-checkbox-group v-model="formData.total_price" @change="handleChange('total_price')">
-                            <el-checkbox v-for="item in fillData.total_priceData" :key="item.id" :label="item">{{item.title}}
+                            <el-checkbox v-for="item in fillData.total_priceData" :key="item.id" :label="item">
+                                {{item.title}}
                             </el-checkbox>
                         </el-checkbox-group>
                     </div>
@@ -56,7 +62,8 @@
                     <div class="house-type mt-20">
                         <span class="title">户型</span>
                         <el-checkbox-group v-model="formData.bedroom" class="fll">
-                            <el-checkbox v-for="item in fillData.bedroomData" :key="item.id" :label="item">{{item.title}}
+                            <el-checkbox v-for="item in fillData.bedroomData" :key="item.id" :label="item">
+                                {{item.title}}
                             </el-checkbox>
                         </el-checkbox-group>
                     </div>
@@ -77,7 +84,8 @@
                             装修
                         </span>
                         <el-checkbox-group v-model="formData.decoration">
-                            <el-checkbox v-for="item in fillData.decorationData" :key="item.id" :label="item">{{item.title}}
+                            <el-checkbox v-for="item in fillData.decorationData" :key="item.id" :label="item">
+                                {{item.title}}
                             </el-checkbox>
                         </el-checkbox-group>
                     </div>
@@ -86,7 +94,8 @@
                             朝向
                         </span>
                         <el-checkbox-group v-model="formData.direction">
-                            <el-checkbox v-for="item in fillData.directionData" :key="item.id" :label="item">{{item.title}}
+                            <el-checkbox v-for="item in fillData.directionData" :key="item.id" :label="item">
+                                {{item.title}}
                             </el-checkbox>
                         </el-checkbox-group>
                     </div>
@@ -95,7 +104,8 @@
                             楼龄
                         </span>
                         <el-checkbox-group v-model="formData.built_area">
-                            <el-checkbox v-for="item in fillData.built_areaData" :key="item.id" :label="item">{{item.title}}
+                            <el-checkbox v-for="item in fillData.built_areaData" :key="item.id" :label="item">
+                                {{item.title}}
                             </el-checkbox>
                         </el-checkbox-group>
                     </div>
@@ -105,7 +115,8 @@
                             楼层
                         </span>
                         <el-checkbox-group v-model="formData.floor_type">
-                            <el-checkbox v-for="item in fillData.floor_typeData" :key="item.id" :label="item">{{item.title}}
+                            <el-checkbox v-for="item in fillData.floor_typeData" :key="item.id" :label="item">
+                                {{item.title}}
                             </el-checkbox>
                         </el-checkbox-group>
                     </div>
@@ -135,9 +146,9 @@
                             筛选分类
                         </span>
                         <div class="type-arr clearfix">
-                            <span v-for="item in selectedData" class="select-item" @click="handleReduce(item)" >
+                            <span v-for="item in selectedData" class="select-item" @click="handleReduce(item)">
                                 {{item.title}}
-                                <i class="iconfont icon-cha fright" ></i>
+                                <i class="iconfont icon-cha fright"></i>
                             </span>
                             <span class="clear-all" @click="handleClearAll">
                                 <i class="iconfont icon-lajitong"></i> 清除全部
@@ -148,22 +159,91 @@
             </filterBox>
         </div>
         <!--筛选盒子结束-->
-        <div class="house-list" style="width: 1100px;margin: 30px auto;">
-            <h2>共找到{{houseCount}}房源</h2>
+
+
+
+        <div class="house-list" style="width: 1100px;margin: 80px auto;">
+
+            <div class="data-list-wrap">
+                <div class="order-box clearfix">
+                    <label v-for="item in fillData.orderData" class="order-label" :class="{active: params.order == item.id}">
+                        {{item.title}}
+                        <input type="radio"  name="order" :value="item.id" v-model="params.order">
+                    </label>
+                </div>
+            </div>
+
+            <!--<div class="filter-box clearfix">-->
+                <!--<span class="title">-->
+                   <!--筛选-->
+                <!--</span>-->
+                <!--<el-checkbox-group>-->
+                    <!--<el-checkbox></el-checkbox>-->
+                <!--</el-checkbox-group>-->
+            <!--</div>-->
+
+            <h2>共找到<span style="color: #c30d23; display: inline-block;margin: 0 5px;">{{houseCount}}个</span> 呼和浩特 二手房源</h2>
             <div class="house-item clearfix" v-for="item in houseArr">
                 <div class="item-img fll">
-                    <img :src="'/origin'+item.pic" alt="">
+                    <img :src="'/origin'+item.pic">
                 </div>
-                <div class="item.msg fll">
+                <div class="item-msg fll">
                     <div class="title">
                         {{item.title}}
                     </div>
-                    <div class="price flr">
-                        {{item.total_price}}
+                    <div class="introduce">
+                        <span>{{item.village}}
+                            |
+                            {{item.bedroom}}室
+                            |
+                            {{item.livingroom}}厅
+                            |
+                            {{item.wc}}卫生{{item.direction}}
+                        </span>
+                    </div>
+                    <div class="build mt-20">
+                        <span>
+                            {{item.floor}}/{{item.floor_totle}}
+                            |
+                            {{item.decoration}}
+                        </span>
+                    </div>
+                    <div class="construction-time mt-20">
+                        <span>
+                            {{item.age}}年建
+                            |
+                            {{item.type}}
+                        </span>
+                    </div>
+                    <div class="attention mt-20">
+                        <span>
+                            {{item.guanzhu}}人关注
+                            |
+                            共{{item.guanzhu_num}}次带看
+                            |
+                            {{item.fabushijian>0?`${item.fabushijian}天前发布`:"今天发布"}}
+                        </span>
+                    </div>
+                    <div class="good-point" v-if="item.lable">
+                        <span v-if="item.lable" style="background:#5f1985;color:#FFFFFF;" v-for="label in item.lable">
+                            {{label.name}}
+                        </span>
+                    </div>
+                </div>
+                <div class="price-box flr">
+                    <div class="total-price">
+                        {{item.total_price}} <span class="unit">万</span>
+                    </div>
+                    <div class="unit-price">
+                        单价{{item.unit_price}}元/平米
+                    </div>
+                    <div class="follow">
+                        关注
                     </div>
                 </div>
             </div>
         </div>
+
 
 
         <friendlyLink></friendlyLink>
@@ -171,13 +251,94 @@
 </template>
 
 <style scoped lang="scss">
-    .house-item {
+    .house-list{
+        h2 {
+            font-size: 30px;
+            color: #333;
+            margin-top: 32px;
+            margin-bottom: 40px;
+        }
+        .house-item {
+            margin-bottom: 40px;
+            img {
+                height: 214px;
+                width: 285px;
+            }
+            .item-msg {
+                margin-left: 30px;
+                .title {
+                    font-size: 20px;
+                    margin-bottom: 30px;
+                    color: #333;
+                    font-weight: 400;
+                }
+            }
+            .good-point {
+                margin-top: 12px;
+                span {
+                    display: inline-block;
+                    color: #5f1985;
+                    background: #efe8f3;
+                    padding: 4px 10px;
+                    border-radius: 4px;
+                    margin-right: 10px;
+                }
+            }
+            .price-box {
+                text-align: right;
+                color: #c30d23;
+                font-size: 40px;
+                .unit {
+                    font-size: 20px;
+                }
 
-        img {
-            height: 214px;
-            width: 285px;
+                .unit-price {
+                    margin-top: 20px;
+                    color: #666;
+                    font-size: 14px;
+                }
+                .follow {
+                    float: right;
+                    width: 100px;
+                    line-height: 36px;
+                    height: 36px;
+                    background: #fff;
+                    color: #c30d23;
+                    border: 1px solid #c30d23;
+                    border-radius: 4px;
+                    margin-top: 40px;
+                    text-align: center;
+                    font-size: 16px;
+                    cursor: pointer;
+                    user-select: none;
+                    margin-right: 0;
+                    box-sizing: border-box;
+                }
+            }
+
         }
     }
+    .data-list-wrap label.active {
+        background: #c30d23;
+        color: #fff;
+    }
+    .data-list-wrap label {
+        float: left;
+        font-size: 18px;
+        cursor: pointer;
+        padding: 10px 20px;
+        margin-right: 20px;
+        background: #fff;
+        color: #c30d23;
+        border-radius: 20px;
+        border: 1px solid #c30d23;
+
+        input {
+            display: none;
+        }
+    }
+
+
 </style>
 
 <script>
@@ -226,8 +387,8 @@
                     dianti: [],
                     age: [],
                     floor_type: [],
-                    search: ""
-
+                    search: "",
+                    order: 1
                 },
                 fillData: {
                     total_priceData: [
@@ -297,6 +458,24 @@
                         {id: 2, title: "低楼层"},
                         {id: 3, title: "中层"},
                         {id: 4, title: "中高层"},
+                    ],
+                    orderData: [
+                        {
+                            title: "最新",
+                            id: 1
+                        },
+                        {
+                            title: "房屋总价",
+                            id: 2
+                        },
+                        {
+                            title: "房屋单价",
+                            id: 6
+                        },
+                        {
+                            title: "房屋面积",
+                            id: 4
+                        }
                     ]
                 },
                 isChecked: {
@@ -307,7 +486,13 @@
                 },
                 selectedObj: {},
                 houseCount: 0,
-                houseArr: []
+                houseArr: [],
+                orderComputed: {},
+                params: {
+                    page_size: 10,
+                    page_num: 1,
+                    order: 1
+                }
             }
         },
         components: {
@@ -322,14 +507,14 @@
 
             },
             //不限制之后清空所选的数组
-            handleClear(key){
-                if(this.isChecked[key]){
+            handleClear(key) {
+                if (this.isChecked[key]) {
                     this.formData[key].splice(0);
                 }
             },
             //选择后条件后调整不限制复选框的选中与否
             handleChange(val) {
-                if(this.formData[val].length>0){
+                if (this.formData[val].length > 0) {
                     this.isChecked[val] = false;
                 }
                 else {
@@ -339,13 +524,14 @@
             //点击清除所有选择中已选中的单个条件
             handleReduce(item) {
                 let index = this.formData[item._parentName].findIndex(val => val == item.id);
-                this.formData[item._parentName].splice(index,1)
+                this.formData[item._parentName].splice(index, 1)
             },
             //清除所有选中条件
             handleClearAll() {
+
                 let formData = this.formData;
-                for(let arr in formData){
-                    if(formData[arr] instanceof Array){
+                for (let arr in formData) {
+                    if (formData[arr] instanceof Array) {
                         formData[arr].splice(0);
                         this.handleChange(arr);
                     }
@@ -353,21 +539,14 @@
             },
             getData() {
                 let formData = this.formData;
-                let params = {
-                    page_size: 10,
-                    page_num: 1,
-                    order: 1,
-                    r_id: 0,
-                    userid: 653
-                };
+                let params = this.params;
 
-                for(let key in formData){
-                    if(formData[key].length>0){
+                for (let key in formData) {
+                    if (formData[key] instanceof Array&&formData[key].length>0) {
                         params[key] = formData[key].map(item => item.id)
                     }
                 }
-                axios.get(api.paramToUrl(api.used_lists,params)).then(res => {
-                    console.log(res);
+                axios.get(api.paramToUrl(api.used_lists, params)).then(res => {
                     this.houseCount = res.data.count;
                     this.houseArr = res.data.data;
                 })
@@ -377,8 +556,8 @@
             selectedData() {
                 let formData = this.formData;
                 let allData = [];
-                for(let key in formData){
-                    if(formData[key] instanceof Array){
+                for (let key in formData) {
+                    if (formData[key] instanceof Array) {
                         formData[key].map(item => {
                             item._parentName = key;
                         })
@@ -458,6 +637,7 @@
         width: 1004px;
         float: right;
     }
+
     .search-wrap input {
         float: left;
         width: 160px;
@@ -466,6 +646,7 @@
         line-height: 21px;
         outline: none;
     }
+
     .search-wrap .search-btn {
         outline: 0;
         background: #c30d23;
@@ -478,6 +659,7 @@
         border: none;
         margin-left: 8px;
     }
+
     .select-item {
         float: left;
         border: 1px solid #ccc;
@@ -492,12 +674,14 @@
         margin-bottom: 20px;
         margin-top: -5px;
     }
+
     .select-item i {
         float: right;
         background: #ccc;
         color: #fff;
         width: 26px
     }
+
     .clear-all {
         float: left;
         margin-top: -5px;

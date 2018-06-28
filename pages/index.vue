@@ -204,6 +204,8 @@
         <!--右侧浮动框-->
         <rightBox></rightBox>
         <!--右侧浮动框结束-->
+        <i class="iconfont icon-wode"></i>
+
     </div>
 </template>
 <style lang="scss">
