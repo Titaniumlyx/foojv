@@ -250,96 +250,6 @@
     </div>
 </template>
 
-<style scoped lang="scss">
-    .house-list{
-        h2 {
-            font-size: 30px;
-            color: #333;
-            margin-top: 32px;
-            margin-bottom: 40px;
-        }
-        .house-item {
-            margin-bottom: 40px;
-            img {
-                height: 214px;
-                width: 285px;
-            }
-            .item-msg {
-                margin-left: 30px;
-                .title {
-                    font-size: 20px;
-                    margin-bottom: 30px;
-                    color: #333;
-                    font-weight: 400;
-                }
-            }
-            .good-point {
-                margin-top: 12px;
-                span {
-                    display: inline-block;
-                    color: #5f1985;
-                    background: #efe8f3;
-                    padding: 4px 10px;
-                    border-radius: 4px;
-                    margin-right: 10px;
-                }
-            }
-            .price-box {
-                text-align: right;
-                color: #c30d23;
-                font-size: 40px;
-                .unit {
-                    font-size: 20px;
-                }
-
-                .unit-price {
-                    margin-top: 20px;
-                    color: #666;
-                    font-size: 14px;
-                }
-                .follow {
-                    float: right;
-                    width: 100px;
-                    line-height: 36px;
-                    height: 36px;
-                    background: #fff;
-                    color: #c30d23;
-                    border: 1px solid #c30d23;
-                    border-radius: 4px;
-                    margin-top: 40px;
-                    text-align: center;
-                    font-size: 16px;
-                    cursor: pointer;
-                    user-select: none;
-                    margin-right: 0;
-                    box-sizing: border-box;
-                }
-            }
-
-        }
-    }
-    .data-list-wrap label.active {
-        background: #c30d23;
-        color: #fff;
-    }
-    .data-list-wrap label {
-        float: left;
-        font-size: 18px;
-        cursor: pointer;
-        padding: 10px 20px;
-        margin-right: 20px;
-        background: #fff;
-        color: #c30d23;
-        border-radius: 20px;
-        border: 1px solid #c30d23;
-
-        input {
-            display: none;
-        }
-    }
-
-
-</style>
 
 <script>
     import topLinks from '~/components/secondHand/header'
@@ -697,3 +607,94 @@
         }
     }
 </style>
+<style scoped lang="scss">
+    .house-list{
+        h2 {
+            font-size: 30px;
+            color: #333;
+            margin-top: 32px;
+            margin-bottom: 40px;
+        }
+        .house-item {
+            margin-bottom: 40px;
+            img {
+                height: 214px;
+                width: 285px;
+            }
+            .item-msg {
+                margin-left: 30px;
+                .title {
+                    font-size: 20px;
+                    margin-bottom: 30px;
+                    color: #333;
+                    font-weight: 400;
+                }
+            }
+            .good-point {
+                margin-top: 12px;
+                span {
+                    display: inline-block;
+                    color: #5f1985;
+                    background: #efe8f3;
+                    padding: 4px 10px;
+                    border-radius: 4px;
+                    margin-right: 10px;
+                }
+            }
+            .price-box {
+                text-align: right;
+                color: #c30d23;
+                font-size: 40px;
+                .unit {
+                    font-size: 20px;
+                }
+
+                .unit-price {
+                    margin-top: 20px;
+                    color: #666;
+                    font-size: 14px;
+                }
+                .follow {
+                    float: right;
+                    width: 100px;
+                    line-height: 36px;
+                    height: 36px;
+                    background: #fff;
+                    color: #c30d23;
+                    border: 1px solid #c30d23;
+                    border-radius: 4px;
+                    margin-top: 40px;
+                    text-align: center;
+                    font-size: 16px;
+                    cursor: pointer;
+                    user-select: none;
+                    margin-right: 0;
+                    box-sizing: border-box;
+                }
+            }
+
+        }
+    }
+    .data-list-wrap label.active {
+        background: #c30d23;
+        color: #fff;
+    }
+    .data-list-wrap label {
+        float: left;
+        font-size: 18px;
+        cursor: pointer;
+        padding: 10px 20px;
+        margin-right: 20px;
+        background: #fff;
+        color: #c30d23;
+        border-radius: 20px;
+        border: 1px solid #c30d23;
+
+        input {
+            display: none;
+        }
+    }
+
+
+</style>
+
