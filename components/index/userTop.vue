@@ -1,17 +1,43 @@
 <template>
     <div class="user-top">
         <span class="login">
-            <nuxt-link to="/login" href="javascript:;">请登录</nuxt-link>
+            <nuxt-link to="/personalCenter" v-if="username">{{username}}</nuxt-link>
+            <nuxt-link to="/login"  v-else>请登录</nuxt-link>
         </span>
         <span class="register">
-            <nuxt-link to="/register" href="javascript:;">立即注册</nuxt-link>
+            <a href="javascript:" v-if="username" @click="logOut">退出</a>
+            <nuxt-link to="/register" v-else>立即注册</nuxt-link>
         </span>
     </div>
 </template>
 
 <script>
+    import cookies from 'js-cookie'
+    import common from '~/js/common'
+    import {mapState} from 'vuex'
+
     export default {
-        name: "userTop"
+        name: "userTop",
+        data() {
+            return {
+
+            }
+        },
+        methods: {
+            getLoginStatus: common.getLoginStatus,
+            logOut: common.logOut
+        },
+        created() {
+            this.getLoginStatus();
+        },
+        computed: {
+            ...mapState([
+                'userid',
+                'username',
+                'userpic',
+                'userphone',
+            ])
+        }
     }
 </script>
 

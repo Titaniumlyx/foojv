@@ -168,7 +168,7 @@
                 <div class="order-box clearfix">
                     <label v-for="item in fillData.orderData" class="order-label" :class="{active: params.order == item.id}">
                         {{item.title}}
-                        <input type="radio"  name="order" :value="item.id" v-model="params.order">
+                        <input type="radio"  name="order" :value="item.id" @change="getData" v-model="params.order">
                     </label>
                 </div>
             </div>
@@ -237,13 +237,15 @@
                     <div class="unit-price">
                         单价{{item.unit_price}}元/平米
                     </div>
-                    <div class="follow">
+                    <div class="follow cancel-follow" @click="handleCancel(item.id)" v-if="item.guanzhu==1">
+                        已关注
+                    </div>
+                    <div class="follow" @click="handleCollect(item.id)" v-else>
                         关注
                     </div>
                 </div>
             </div>
         </div>
-
 
 
         <friendlyLink></friendlyLink>
@@ -258,10 +260,18 @@
     import filterBox from '~/components/filter-box'
     import search from '~/components/secondHand/search'
     import axios from '~/plugins/axios'
+    import {mapState} from 'vuex'
     import api from '~/api'
 
     export default {
         name: "secondHand",
+        components: {
+            friendlyLink,
+            topLinks,
+            logoLink,
+            filterBox,
+            search
+        },
         head() {
             return {
                 title: "福居网二手房"
@@ -405,13 +415,7 @@
                 }
             }
         },
-        components: {
-            friendlyLink,
-            topLinks,
-            logoLink,
-            filterBox,
-            search
-        },
+
         methods: {
             handleCustom() {
 
@@ -449,17 +453,51 @@
             },
             getData() {
                 let formData = this.formData;
-                let params = this.params;
+                let params = {...this.params};
 
                 for (let key in formData) {
                     if (formData[key] instanceof Array&&formData[key].length>0) {
                         params[key] = formData[key].map(item => item.id)
                     }
                 }
+                if(this.userid){
+                    params.userid = this.userid
+                }
+                const loading = this.$loading({
+                    lock: true,
+                    text: '数据加载中...',
+                    spinner: 'el-icon-loading',
+                    background: 'rgba(0, 0, 0, 0.7)'
+                });
                 axios.get(api.paramToUrl(api.used_lists, params)).then(res => {
                     this.houseCount = res.data.count;
                     this.houseArr = res.data.data;
+                    loading.close()
+                }).catch(err => {
+                    loading.close()
                 })
+            },
+            //取消关注
+            handleCancel(id) {
+                if(this.userid){
+                    this.
+                    $axios.post(api.houseCollectCancel,{type:1,user_id: this.userid,house_id: id})
+                        .then(res => {
+                            this.$message.success("取关成功");
+                            this.getData();
+                        })
+                }
+            },
+            //关注
+            handleCollect(id) {
+                if(this.userid){
+                    this.
+                    $axios.post(api.houseCollect,{type:1,user_id: this.userid,house_id: id})
+                        .then(res => {
+                            this.$message.success("关注成功")
+                            this.getData();
+                        })
+                }
             }
         },
         computed: {
@@ -474,8 +512,13 @@
                         allData.push(...formData[key]);
                     }
                 }
-                this.getData();
                 return allData;
+            },
+            ...mapState(['userid','username'])
+        },
+        watch:{
+            selectedData() {
+                this.getData();
             }
         },
         mounted() {
@@ -654,7 +697,7 @@
                     color: #666;
                     font-size: 14px;
                 }
-                .follow {
+                .follow{
                     float: right;
                     width: 100px;
                     line-height: 36px;
@@ -670,6 +713,10 @@
                     user-select: none;
                     margin-right: 0;
                     box-sizing: border-box;
+                }
+                .cancel-follow {
+                    color: #666;
+                    border: 1px solid #ccc;
                 }
             }
 

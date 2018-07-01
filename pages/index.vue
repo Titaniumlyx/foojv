@@ -248,6 +248,7 @@
                     imgFit.dom = el;
                     imgFit.setBannerHeight();
                     imgFit.bindHandle();
+                    imgFit.setBannerHeight();
                 },
                 unbind(el,binding) {
                     imgFit.unbindHandle();

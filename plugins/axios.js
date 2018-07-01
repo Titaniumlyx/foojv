@@ -1,4 +1,6 @@
-import * as axios from 'axios'
+import axios from 'axios'
+import Vue from 'vue';
+import qs from 'qs'
 
 
 let options = {
@@ -19,6 +21,7 @@ let xhr = {
     },
     post(url, params) {
         return new Promise((resolve, reject) => {
+            params = qs.stringify(params)
             axios.create(options).post(url, params).then(res => {
                 resolve(res)
             }).catch(err => {
@@ -28,7 +31,7 @@ let xhr = {
     }
 }
 
-
+Vue.prototype.$axios = xhr;
 
 // The server-side needs a full url to works
 // if (process.server) {

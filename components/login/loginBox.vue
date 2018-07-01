@@ -9,7 +9,7 @@
                 <form @submit.prevent>
                     <div class="phone">
                         <i class="iconfont icon-z-phone"></i>
-                        <input type="tel" placeholder="请输入手机号" v-model="mobile">
+                        <input type="tel" placeholder="请输入手机号" v-model="mobile" autocomplete="on">
                     </div>
                     <div class="pwd">
                         <i class="iconfont icon-mima"></i>
@@ -44,13 +44,13 @@
 <script>
     import md5 from 'md5'
     import axios from '~/plugins/axios'
-    import qs from 'qs'
+    import cookies from 'js-cookie'
     export default {
         name: "loginBox",
         data() {
             return {
-                mobile: "",
-                pwd: ""
+                mobile: 18611507465,
+                pwd: "yjr1923521"
             }
         },
         methods: {
@@ -59,9 +59,18 @@
                     mobile: this.mobile,
                     password: md5(md5(this.pwd))+"fujuwang"
                 }
-                params = qs.stringify(params)
-                axios.post("/api.php?s=Login/login", params).then(res => {
-                    alert(res.data.msg)
+
+                this.$axios.post("/api.php?s=Login/login", params).then(res => {
+                    if(res.data.code == 200){
+                        cookies.set("userid", res.data.data.id, {expires: 10});
+                        cookies.set("username", res.data.data.username, {expires: 10})
+                        cookies.set("userpic", res.data.data.face, {expires: 10})
+                        cookies.set("userphone", res.data.data.mobile, {expires: 10})
+                        this.$message.success("登录成功，正在为您跳转......");
+                        setTimeout(() => {
+                            this.$router.push("/")
+                        },500)
+                    }
                 })
             }
         }
