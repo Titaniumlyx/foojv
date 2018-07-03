@@ -453,20 +453,23 @@
                 let formData = this.formData;
                 let params = {...this.params};
 
-                for (let key in formData) {
-                    if (formData[key] instanceof Array&&formData[key].length>0) {
-                        params[key] = formData[key].map(item => item.id)
+                for(let key in formData){
+                    if(formData[key] instanceof Array&&formData[key].length>0){
+                        params[key] = formData[key]
                     }
                 }
+
                 if(this.userid){
                     params.userid = this.userid
                 }
+
                 const loading = this.$loading({
                     lock: true,
                     text: '数据加载中...',
                     spinner: 'el-icon-loading',
                     background: 'rgba(0, 0, 0, 0.7)'
                 });
+
                 axios.get(api.paramToUrl(api.used_lists, params)).then(res => {
                     this.houseCount = res.data.count;
                     this.houseArr = res.data.data;

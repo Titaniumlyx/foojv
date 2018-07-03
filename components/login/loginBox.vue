@@ -61,15 +61,16 @@
                 }
 
                 this.$axios.post("/api.php?s=Login/login", params).then(res => {
+                    console.log(res);
                     if(res.data.code == 200){
                         cookies.set("userid", res.data.data.id, {expires: 10});
                         cookies.set("username", res.data.data.username, {expires: 10})
                         cookies.set("userpic", res.data.data.face, {expires: 10})
                         cookies.set("userphone", res.data.data.mobile, {expires: 10})
                         this.$message.success("登录成功，正在为您跳转......");
-                        setTimeout(() => {
-                            this.$router.push("/")
-                        },500)
+                        // setTimeout(() => {
+                        //     this.$router.push("/")
+                        // },500)
                     }
                 })
             }
