@@ -1,8 +1,6 @@
 <template>
     <div>
-        <header class="secondhand-header">
-            <top-links></top-links>
-        </header>
+        <top-links></top-links>
         <logoLink></logoLink>
         <div class="breadcrumb-wrap">
             <el-breadcrumb separator-class="el-icon-arrow-right">
@@ -183,14 +181,14 @@
             <!--</div>-->
 
             <h2>共找到<span style="color: #c30d23; display: inline-block;margin: 0 5px;">{{houseCount}}个</span> 呼和浩特 二手房源</h2>
-            <div class="house-item clearfix" v-for="item in houseArr">
-                <div class="item-img fll">
+            <div :key="index" class="house-item clearfix" v-for="(item,index) in houseArr">
+                <nuxt-link :to="{name: 'secondHand-id', params: {id: item.id}}" class="item-img fll">
                     <img :src="'/origin'+item.pic">
-                </div>
+                </nuxt-link>
                 <div class="item-msg fll">
-                    <div class="title">
+                    <nuxt-link :to="{name: 'secondHand-id', params: {id: item.id}}" class="title">
                         {{item.title}}
-                    </div>
+                    </nuxt-link>
                     <div class="introduce">
                         <span>{{item.village}}
                             |
@@ -237,10 +235,10 @@
                     <div class="unit-price">
                         单价{{item.unit_price}}元/平米
                     </div>
-                    <div class="follow cancel-follow" @click="handleCancel(item.id)" v-if="item.guanzhu==1">
+                    <div class="follow cancel-follow" @click.stop="handleCancel(item.id)" v-if="item.guanzhu==1">
                         已关注
                     </div>
-                    <div class="follow" @click="handleCollect(item.id)" v-else>
+                    <div class="follow" @click.stop="handleCollect(item.id)" v-else>
                         关注
                     </div>
                 </div>
@@ -659,6 +657,7 @@
             margin-bottom: 40px;
         }
         .house-item {
+            display: block;
             margin-bottom: 40px;
             img {
                 height: 214px;
@@ -667,6 +666,7 @@
             .item-msg {
                 margin-left: 30px;
                 .title {
+                    display: block;
                     font-size: 20px;
                     margin-bottom: 30px;
                     color: #333;
