@@ -1,0 +1,950 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,maximum-scale=1,minimum-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>【福居地产】呼和浩特地图找房_呼和浩特二手房|房价地图(呼和浩特福居网)</title>
+    <meta name="description" content="福居网主打二手房信息展示，为您提供真实的二手房源及二手房详细地买卖信息,每天持续更新二手房源信息供您查询。您可以免费查找二手房买卖信息,请到呼和浩特福居网看房选房。">
+    <meta name="keywords" content="呼和浩特二手房,二手房源,二手房买卖,二手房网,二手房出售,二手房求购,百度地图找房,呼和浩特小区,呼和浩特新楼盘,呼和浩特新楼盘,呼和浩特地图找房,呼和浩特房价地图,呼和浩特房价">
+    <link rel="stylesheet" href="lib/swiper-3.4.2.min.css">
+    <link rel="stylesheet" href="font/iconfont.css">
+    <link rel="stylesheet" href="css/mapSearchNewHouse.min.css">
+    <link rel="stylesheet" href="css/fakeLoader.css">
+    <style>
+        html,
+        body {
+            height: 100%;
+        }
+
+        .marks {
+            text-align: center;
+            width: 150px;
+            font-size: 16px;
+            padding-top: 10px;
+        }
+
+        .marks div {
+            margin-bottom: 8px;
+        }
+
+        .diqu {
+            font-size: 20px;
+            color: #ececec;
+        }
+
+        .swiper-wrapper img {
+            width: 100%;
+        }
+
+        .searach-result {
+            /*width: 1021px;*/
+        }
+
+        .preview {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: 99999;
+            background: rgba(0, 0, 0, 0.5);
+            display: none;
+        }
+
+        .preview .spinner {
+            left: 50% !important;
+            top: 50% !important;
+        }
+    </style>
+</head>
+<body>
+    <div id="preview" class="preview"></div>
+    <!--头部-->
+    <div class="header">
+        <div class="bottom clearfix">
+            <div class="logo">
+                <span></span>
+                <a href="index.html">
+                    <img src="img/logo.png">
+                </a>
+            </div>
+            <div class="select-city" style="width: 132px">
+                <span>呼和浩特
+                    <i class="iconfont icon-sanjiaoxingxia"></i>
+                </span>
+                <div class=""></div>
+            </div>
+            <div class="second-nav active">
+                <a href="mapSearchSecondHouse.html">二手房</a>
+            </div>
+            <div class="second-nav">
+                <a href="mapSearchNewHouse.html">新房</a>
+            </div>
+            <div class="second-nav">
+                <a href="mapSearchRent.html">租房</a>
+            </div>
+            <div class="second-nav">
+                <a href="mapSearchStore.html">门店</a>
+            </div>
+            <div class="search">
+                <div class="fright clearfix">
+                    <input class="fleft searchInput" type="text">
+                    <div class="searchBtn fleft">搜索</div>
+                </div>
+            </div>
+            <div class="back">返回列表模式
+                <i class="iconfont icon-mjiantou"></i>
+            </div>
+        </div>
+    </div>
+    <!--头部-->
+    <div class="searach-result" data-state="open" style="margin-left: 0px">
+        <div class="filter">
+            <div class="result">共为你找到
+                <span class="result-num">0</span>个房源</div>
+            <div class="btns clearfix">
+                <div data-down="1" data-state="down" class="btn active">最新</div>
+                <div data-down="2" data-state="down" class="btn">总价
+                    <i class="iconfont icon-jiantou1-copy-copy"></i>
+                </div>
+                <div data-down="6" data-state="down" class="btn">单价
+                    <i class="iconfont icon-jiantou1-copy-copy"></i>
+                </div>
+                <div data-down="4" data-state="down" class="btn">面积
+                    <i class="iconfont icon-jiantou1-copy-copy"></i>
+                </div>
+            </div>
+        </div>
+        <div class="result-panel clearfix">
+            <div class="result-listwrap fleft clearfix">
+                <div id="result-list" class="result-list"></div>
+            </div>
+            <div style="display:none;position: relative" class="detail fleft">
+                <!--<div class="top clearfix">
+                <span class="title fleft"></span>
+                <i class=" close iconfont icon-guanbi fright"></i>
+            </div>
+
+            <div class="swiper-container">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide"></div>
+                    <div class="swiper-slide">></div>
+                    <div class="swiper-slide"></div>
+                </div>
+
+                <div class="swiper-button-prev"></div>
+                <div class="swiper-button-next"></div>
+            </div>
+            <div class="houseInfo">
+                <div>
+                    <div class="houseInfo-top"></div>
+                    <div class="houseInfo-bottom"></div>
+                </div>
+                <div>
+                    <div class="houseInfo-top"></div>
+                    <div class="houseInfo-bottom"></div>
+                </div>
+                <div>
+                    <div class="houseInfo-top"></div>
+                    <div class="houseInfo-bottom"></div>
+                </div>
+            </div>
+            <div class="village">
+                <div>小区名称：<span></span></div>
+                <div>小区地址：<span></span></div>
+                <div>发布时间：<span></span></div>
+            </div>
+            <div class="economicMan-info clearfix">
+                <div class="fleft headerImg"><img src="" alt=""></div>
+                <div class="fleft info">
+                    <div class="name"></div>
+                    <div class="workLength"></div>
+                    <div class="score"></div>
+                    <div class="concat"></div>
+                </div>
+            </div>-->
+                <div class="fakeloader" style="position: absolute; width: 100%; height: 100%; top: 0px; left: 0px; z-index: 999;display: block"></div>
+            </div>
+        </div>
+        <div class="result-toggle">
+            <i class="iconfont icon-mjiantou-copy"></i>
+        </div>
+    </div>
+    <!--区域下拉框-->
+    <style>
+        #selectBox {
+            z-index: 998;
+            display: none;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.4);
+            position: fixed;
+            left: 0;
+            top: 0;
+        }
+
+        .selectBox {
+            width: 640px;
+            background: #fff;
+            z-index: 999;
+            position: fixed;
+            left: 50%;
+            top: 50%;
+            display: none;
+            margin-left: -320px;
+            margin-top: -160px;
+            padding: 40px;
+            text-align: left;
+            display: none;
+        }
+
+        .showings_header {
+            border-bottom: 1px solid #ccc;
+            padding-bottom: 10px;
+        }
+
+        .showings_header span {
+            display: block;
+            font-size: 22px;
+            color: #333;
+            font-weight: bold;
+            text-align: left;
+        }
+
+        .showings_header i {
+            cursor: pointer;
+            display: block;
+            width: 30px;
+            height: 30px;
+            /*color: #fff;*/
+            border: 1px solid #fff;
+            background: white;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 30px;
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            /*transform: translate(665px,-82px);
+        -webkit-transform: translate(665px,-82px);
+        -moz-transform: translate(665px,-82px);
+        -ms-transform: translate(665px,-82px);*/
+        }
+
+        .selectBox ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            width: 280px;
+        }
+
+        .selectBox ul span {
+            color: #999;
+        }
+
+        .selectBox ul li {
+            margin: 10px 0;
+        }
+
+        .selectBox ul li a {
+            color: #333;
+            cursor: pointer;
+        }
+
+        .showings_c_h {
+            margin: 20px 0;
+        }
+
+        .showings_c_h a {
+            color: #333;
+            font-size: 18px;
+            cursor: pointer;
+        }
+
+        .showings_c_h a:hover,
+        .selectBox ul li a:hover {
+            cursor: pointer;
+            color: #c30d23;
+        }
+    </style>
+    <div id="selectBox"></div>
+    <div class="selectBox">
+        <div class="showings_header">
+            <span>选择区县</span>
+            <i class="iconfont icon-chahao"></i>
+        </div>
+        <div class="showings_content clearfix">
+            <div class="showings_c_h">
+                <a data-rid="0">呼和浩特</a>
+            </div>
+            <div class="fleft">
+                <ul></ul>
+            </div>
+        </div>
+    </div>
+    <script id="city" type="text/html">{{each data as item i}}
+        <li class="clearfix">
+            <span class="fleft">{{item.key}}</span>
+            <div style="margin-left: 20px;">
+                {{each item.list as v}}
+                <a data-rId="{{v.id}}">{{v.area}}</a>
+                {{/each}}
+                <!--<a href="index.html?city=和林格尔县">和林格尔县</a>-->
+            </div>
+        </li>
+        {{/each}}</script>
+    <div id="allmap" class="mainMap"></div>
+    <script type="text/html" id="resultItem">{{each data as item i}}
+        <div data-id="{{item.id}}" class="resultItem clearfix">
+            <div class="item-left fleft">
+                <img src="http://www.fooju.cn{{item.pic}}" alt="">
+            </div>
+            <div class="item-right fleft">
+                <div class="housename">{{item.title}}</div>
+                <div class="address">{{item.bedroom}}室{{item.livingroom}}厅 | {{item.direction}} | {{item.floor}}/{{item.floor_totle}}层</div>
+                <div class="info">
+                    <div>{{item.village}}</div>
+                    <div class="price">
+                        <span>{{item.total_price}}万元</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {{/each}}</script>
+    <script type="text/html" id="detail">
+        <div class="fakeloader" style="position: absolute; width: 100%; height: 100%; top: 0px; left: 0px; z-index: 999;display: block"></div>
+        <div class="top clearfix">
+            <span class="title fleft">{{data.jibenxinxi.title}}</span>
+            <i class=" close iconfont icon-guanbi fright"></i>
+        </div>
+        <!--轮播图-->
+        <div class="swiper-container">
+            <div class="swiper-wrapper">
+                {{each data.jibenxinxi.pic as item i}}
+                <div class="swiper-slide">
+                    <img style="width: 100%" src="http://www.fooju.cn{{item.pic}}" alt="">
+                </div>
+                {{/each}}
+            </div>
+
+            <!-- 如果需要导航按钮 -->
+            <div class="swiper-button-prev"></div>
+            <div class="swiper-button-next"></div>
+        </div>
+        <div class="houseInfo">
+            <div>
+                <div class="houseInfo-top">{{data.jibenxinxi.bedroom}}室{{data.jibenxinxi.livingroom}}厅</div>
+                <div class="houseInfo-bottom">{{data.jibenxinxi.floor}}/{{data.jibenxinxi.floor_totle}}层</div>
+            </div>
+            <div>
+                <div class="houseInfo-top">{{data.jibenxinxi.direction}}</div>
+                <div class="houseInfo-bottom">{{data.jibenxinxi.decoration}}{{if data.jibenxinxi.dianti && data.jibenxinxi.decoration}}/{{/if}}{{if data.jibenxinxi.dianti == "是"}}有电梯{{/if}}{{if data.jibenxinxi.dianti == "否"}}无电梯{{/if}}</div>
+            </div>
+            <div>
+                <div class="houseInfo-top">{{data.jibenxinxi.built_area}}平米</div>
+                <div class="houseInfo-bottom">{{data.jibenxinxi.age}}建成</div>
+            </div>
+        </div>
+        <div class="village">
+            <div>小区名称：
+                <span>{{data.jibenxinxi.village}}</span>
+            </div>
+            <div>小区地址：
+                <span>{{data.jibenxinxi.region}}</span>
+            </div>
+            <div>发布时间：
+                <span>{{data.jibenxinxi.age}}年建成</span>
+            </div>
+        </div>
+        <div class="economicMan-info clearfix">
+            <div class="fleft headerImg">
+                {{if data.jibenxinxi.face != null && data.jibenxinxi.face != ""}}
+                <img src="{{data.jibenxinxi.face}}" alt=""> {{else}}
+                <img src="img/fangshunli.png" alt=""> {{/if}}
+            </div>
+            <div class="fleft info">
+                <div class="name">{{data.jibenxinxi.name}}</div>
+                <div class="workLength">从业年限;{{data.jibenxinxi.congye_time}}年</div>
+                <div class="score">评分：{{data.jibenxinxi.avg_score}}/{{data.jibenxinxi.c_num}}人评价</div>
+                <div class="concat">{{data.jibenxinxi.f_phone}} 转 {{data.jibenxinxi.agent_phone}}</div>
+            </div>
+        </div>
+    </script>
+    <script type="text/html"></script>
+    <script src="js/jquery-1.7.1.min.js"></script>
+    <script src="lib/fakeLoader.js"></script>
+    <script src="lib/swiper-3.4.2.jquery.min.js"></script>
+    <script src="lib/api.js"></script>
+    <script src="lib/spin.js"></script>
+    <script>
+        api.loading();
+    </script>
+    <script src="js/template-web.js"></script>
+    <script src="lib/query.js"></script>
+    <script src="js/select.js"></script>
+    <i class="icon-jiantou2-copy-copy-copy"></i>
+    <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=vYPsSNCirFSPBaMWY6Nd36ON0XuWWYvX"></script>
+    <script>
+        var r_id = api.getCurrentArea().r_id,
+            v_id = "";
+        $(".result-listwrap").hover(function() {
+            $(this).addClass("scrollWrap");
+        }, function() {
+            $(this).removeClass("scrollWrap");
+        })
+        /*动态计算左侧列表的高度*/
+        function resizeListH() {
+            var h = $("body").height() - $(".header").outerHeight() - $(".filter").outerHeight();
+            $(".result-listwrap").css("height", h - 20);
+            $(".result-panel .detail").css("height", h - 22);
+        }
+
+        function resizeMap() {
+            var h = $("body").height() - $(".header").outerHeight();
+            $("#allmap").css("height", h - 22);
+        }
+        resizeListH();
+        resizeMap();
+        $(window).resize(function() {
+            resizeListH();
+            resizeMap();
+        })
+
+        /*初始化swiper*/
+        function initSwiper() {
+            var adSwiper = new Swiper('.swiper-container', {
+                direction: 'horizontal',
+                loop: true,
+                autoplay: 2000,
+                autoplayDisableOnInteraction: false,
+                nextButton: '.swiper-button-next',
+                prevButton: '.swiper-button-prev',
+            });
+            var headlineSwiper = new Swiper('.headline-swiper', {
+                direction: 'vertical',
+                loop: true,
+                autoplay: 2000,
+                autoplayDisableOnInteraction: false
+            })
+        }
+        initSwiper();
+    </script>
+    <script>
+        var order = 1;
+        var title = Query.getQuery("q") || "";
+
+        function toogleFilter() {
+            $(".btns .btn").click(function() {
+                if ($(this).hasClass("active")) {
+                    $(this).find("i").toggleClass("icon-jiantou1-copy-copy").toggleClass("icon-jiantou2-copy-copy-copy");
+                    if ($(this).attr("data-down") * 1 !== 1) {
+                        if ($(this).attr("data-state") === "down") {
+                            $(this).attr("data-state", "up")
+                            $(this).attr("data-down", $(this).attr("data-down") * 1 + 1)
+                        } else {
+                            $(this).attr("data-state", "down")
+                            $(this).attr("data-down", $(this).attr("data-down") * 1 - 1)
+                        }
+                    }
+                }
+                order = $(this).attr("data-down");
+                $(this).addClass("active").siblings().removeClass("active");
+                mapNewList(r_id, v_id, 1, 10, function(data) {
+                    IObj.index = 1;
+                    IObj.isEnd = false;
+                    renderData(data)
+                })
+
+            })
+        }
+        toogleFilter();
+
+        function init$searachPosition() {
+            var $searach = $(".searach-result");
+            $(".detail").hide();
+            var w = $searach.width();
+            $searach.css("margin-left", -w);
+
+        }
+        //init$searachPosition();
+
+        $(".detail").on("click", ".close", function() {
+            $(".detail").hide();
+            var $searach = $(".searach-result");
+            $searach.css("width", "auto")
+        })
+        $(".resultItem").click(function() {
+            $(".detail").show();
+        })
+        $(".result-toggle").click(function() {
+            var $searach = $(".searach-result");
+            if ($searach.attr("data-state") === "close") {
+                var w = $searach.width();
+                $searach.animate({
+                    "margin-left": 0
+                }, 1000)
+                $searach.attr("data-state", "open");
+                $(this).find("i").removeClass("icon-mjiantou").addClass("icon-mjiantou-copy")
+                //            $(this).find("i").toggleClass("icon-mjiantou-copy","icon-mjiantou")
+                return;
+            }
+            if ($(".detail").is(":hidden")) {
+                var w = $searach.outerWidth();
+                $(this).find("i").removeClass("icon-mjiantou-copy").addClass("icon-mjiantou")
+                $searach.animate({
+                    "margin-left": -w
+                }, 1000, function() {
+                    $searach.attr("data-state", "close")
+                })
+            } else {
+                $(".detail").hide();
+                var $searach = $(".searach-result");
+                $searach.css("width", "auto")
+            }
+        })
+    </script>
+    <script type="text/javascript">
+        var IObj = {}
+        var isSetZoom = false;
+        var areaMarkObjArr = [];
+        var villageMarkObjArr = [];
+        var cityMark;
+        var gloabalType = 1;
+        IObj.infiite = function(callback) {
+            var old = 0;
+            this.index = 0;
+            this.isLoading = false; //是否正在加载
+            this.isEnd = false;
+            var _this = this;
+            $(".result-listwrap").scroll(function() {
+                //				根据scrollTop值的改变判断滚动的顺序
+                if ($(this).scrollTop() <= old) {
+                    old = $(this).scrollTop()
+                    return;
+                }
+                old = $(this).scrollTop()
+                //如果距离底部30则进行加载
+                if ($("#result-list").height() - 5 <= $(this).scrollTop() + $(this).height()) {
+                    //					如果正在加载则不进行添加内容
+                    if (_this.isLoading) {
+                        return;
+                    }
+                    callback(IObj);
+
+                }
+            })
+
+        }
+
+        //点击列表返回
+        $(".back").click(function() {
+            window.location.href = "newHomesList.html";
+        });
+
+        function getAve(arr) {
+            var len = arr.length;
+            var count = 0;
+            $.each(arr, function(index, item) {
+                count += (item * 1);
+            })
+            return count / len;
+        }
+
+        function resizehandler(e) {
+            var target = e.target.getPosition();
+            var geoc = new BMap.Geocoder();
+            geoc.getLocation(target, function(rs) {
+                var addComp = rs.addressComponents;
+                console.log(addComp.province + ", " + addComp.city + ", " + addComp.district + ", " + addComp.street + ", " + addComp.streetNumber);
+                var zoom = map.getZoom()
+                if (zoom >= 9 && zoom <= 16) {
+                    if (currentZoomArea === "vill") {
+                        return
+                    }
+                    getBoundary(addComp.city + addComp.district);
+                }
+            });
+        }
+        // 百度地图API功能
+        /*currentZoomArea:pro,city,vill*/
+        var currentZoomArea = "pro"
+        var map = new BMap.Map("allmap");
+        map.centerAndZoom(new BMap.Point(111.206764, 40.696726), 9);
+        map.enableScrollWheelZoom();
+        map.setMinZoom(8)
+        map.addEventListener("zoomend", function(e) {
+            var zoom = map.getZoom();
+            if (zoom >= 8 && zoom < 9) {
+                if (currentZoomArea === "pro") return;
+                currentZoomArea = "pro";
+                $.each(villageMarkObjArr, function(index, item) {
+                    map.removeOverlay(item);
+                })
+                $.each(areaMarkObjArr, function(index, item) {
+                    map.removeOverlay(item);
+                })
+                var myGeo = new BMap.Geocoder();
+                myGeo.getPoint("呼和浩特", function(point) {
+                    if (point) {
+                        getAreaMapData2(gloabalType, point)
+                    } else {}
+                }, "呼和浩特");
+            }
+            if (zoom <= 11 && zoom >= 9) {
+                if (currentZoomArea === "city") return;
+                currentZoomArea = "city";
+                $.each(villageMarkObjArr, function(index, item) {
+                    map.removeOverlay(item);
+                })
+                $.each(areaMarkObjArr, function(index, item) {
+                    map.removeOverlay(item);
+                })
+                getAreaMapData(gloabalType);
+            }
+            if (zoom >= 14 && zoom <= 16) {
+                if (currentZoomArea === "vill") return;
+                currentZoomArea = "vill";
+                $.each(villageMarkObjArr, function(index, item) {
+                    map.removeOverlay(item);
+                })
+                /*        $.each(areaMarkObjArr,function (index,item) {
+                 map.removeOverlay(item);
+                 })*/
+                var minDistance = 0,
+                    minMarkObj, isFirst = true;
+                $.each(this.getOverlays(), function(index, item) {
+                    console.log(item)
+                    if (item.wQ === "Marker") {
+                        var ds = map.getDistance(map.getCenter(), item.getPosition());
+
+                        if (isFirst) {
+                            minDistance = ds
+                            minMarkObj = item;
+                            isFirst = false;
+                        } else {
+                            if (minDistance > ds) {
+                                minMarkObj = item;
+                                minDistance = ds
+                            }
+                        }
+                    }
+                })
+                r_id = $(minMarkObj.getLabel().getContent()).attr("data-id")
+                $.each(areaMarkObjArr, function(index, item) {
+                    map.removeOverlay(item);
+                })
+                map.removeOverlay(cityMark);
+                getVillageMapData(gloabalType, r_id);
+            }
+        })
+        var myGeo = new BMap.Geocoder();
+        myGeo.getPoint("呼和浩特", function(point) {
+            if (point) {
+                getAreaMapData2(gloabalType, point)
+            } else {}
+        }, "呼和浩特");
+
+        function getBoundary(name) {
+            var bdary = new BMap.Boundary();
+            bdary.get(name, function(rs) { //获取行政区域
+                map.clearOverlays(); //清除地图覆盖物
+                var count = rs.boundaries.length; //行政区域的点有多少个
+                if (count === 0) {
+                    return;
+                }
+                var pointArray = [];
+                for (var i = 0; i < count; i++) {
+                    var ply = new BMap.Polygon(rs.boundaries[i], {
+                        strokeWeight: 2,
+                        strokeColor: "#ff0000"
+                    }); //建立多边形覆盖物
+                    ply.setFillColor("#5f1985")
+                    map.addOverlay(ply); //添加覆盖物
+                    pointArray = pointArray.concat(ply.getPath());
+                }
+            });
+        }
+
+        function setLableAndMark(content, point, type) {
+            //创建小狐狸
+            var myIcon = new BMap.Icon("img/mark1.png", new BMap.Size(150, 100));
+            myIcon.imageSize = new BMap.Size(150, 100)
+            var marker2 = new BMap.Marker(point, {
+                icon: myIcon
+            }); // 创建标注
+            marker2.addEventListener("mouseover", function(e) {
+                resizehandler(e)
+                map.clearOverlays();
+                var myIcon = new BMap.Icon("img/mark2.png", new BMap.Size(150, 100));
+                myIcon.imageSize = new BMap.Size(150, 100)
+                this.setIcon(myIcon);
+            })
+            marker2.addEventListener("mouseout", function(e) {
+                map.clearOverlays(); //清除地图覆盖物
+                var myIcon = new BMap.Icon("img/mark1.png", new BMap.Size(150, 100));
+                myIcon.imageSize = new BMap.Size(150, 100)
+                this.setIcon(myIcon);
+            })
+            marker2.addEventListener("click", function(e) {
+                if (currentZoomArea === "vill") {
+                    var myIcon = new BMap.Icon("img/mark2.png", new BMap.Size(150, 100));
+                    myIcon.imageSize = new BMap.Size(150, 100)
+                    this.setIcon(myIcon);
+                }
+                if (currentZoomArea === "pro") {
+                    map.removeOverlay(this)
+                    map.clearOverlays();
+                    map.setZoom(11);
+                    getAreaMapData(gloabalType);
+                    return;
+                }
+                var id = $(e.target.getLabel().getContent()).attr("data-id")
+                /*如果有type表示是由区县到小区，否则就是小区的点击事件*/
+                if (type) {
+                    r_id = $(e.target.getLabel().getContent()).attr("data-id")
+                    getVillageMapData(type, id)
+                } else {
+                    v_id = id;
+                    mapNewList(r_id, v_id, 1, 10, function(data) {
+                        IObj.index = 1;
+                        IObj.isEnd = false;
+                        IObj.isLoading = false;
+                        renderData(data)
+                    });
+
+                }
+
+            });
+            var label = new BMap.Label(content);
+            label.setStyle({
+                backgroundColor: "rgba(0,0,0,0)",
+                fontSize: "16px",
+                color: "white",
+                "display": "block",
+                borderWidth: "0",
+                textAlign: "center"
+            })
+            marker2.setLabel(label)
+            marker2.disableMassClear();
+            map.addOverlay(marker2); // 将标注添加到地图中
+            return marker2;
+        }
+
+        function getAreaMapData2(type, point) {
+            areaMarkObjArr = []
+            currentZoomArea = "pro";
+            var obj = {
+                types: type,
+                province: "内蒙古",
+                city: "呼和浩特",
+                area: api.getCurrentArea().name,
+                ad: "area"
+            };
+            if (title) {
+                //            obj.key=title;
+                obj.title = title;
+            }
+            $.getJSON(api.paramToUrl(api.mapHouseList, obj), function(data) {
+                var arr = []
+                var count = 0;
+                $.each(data.datas, function(index, item) {
+                    count += (item.count * 1);
+                })
+                var str = "<div data-id='{id}' class='marks'><div class='diqu'>{area}</div><div>共{count}套</div></div>"
+                var content = str.replace(/\{area\}/, "呼和浩特").replace(/\{count\}/, count).replace(/\{id\}/, "")
+                cityMark = setLableAndMark(content, point, type)
+                v_id = "";
+                mapNewList(api.getCurrentArea().r_id, v_id, 1, 10, function(data) {
+                    IObj.index = 1;
+                    IObj.isEnd = false;
+                    renderData(data);
+                    api.loadingHide();
+                })
+            })
+        }
+
+        function getAreaMapData(type) {
+            currentZoomArea = "city";
+            areaMarkObjArr = []
+            var obj = {
+                types: type,
+                province: "内蒙古",
+                city: "呼和浩特",
+                area: api.getCurrentArea().name,
+                ad: "area"
+            };
+            if (title) {
+                //            obj.key=title;
+                obj.title = title;
+            }
+            $.getJSON(api.paramToUrl(api.mapHouseList, obj), function(data) {
+                var arr = []
+                var logPointArr = [];
+                var latPointArr = [];
+                $.each(data.datas, function(index, item) {
+                    var point = new BMap.Point(item.log, item.lat)
+                    logPointArr.push(item.log);
+                    latPointArr.push(item.lat);
+                    if (item.count != 0) {
+                        var str = "<div data-id='{id}' class='marks'><div class='diqu'>{area}</div><div>共{count}套</div></div>"
+                        var content = str.replace(/\{area\}/, item.area).replace(/\{count\}/, item.count).replace(/\{id\}/, item.id)
+                        var m = setLableAndMark(content, point, type)
+                        areaMarkObjArr.push(m);
+                    }
+                    arr.push(point);
+
+                })
+                v_id = "";
+                mapNewList(api.getCurrentArea().r_id, v_id, 1, 10, function(data) {
+                    IObj.index = 1;
+                    IObj.isEnd = false;
+                    renderData(data)
+                })
+                var point = new BMap.Point(getAve(logPointArr), getAve(latPointArr));
+                var viewPort = {
+                    center: point,
+                    zoom: 11
+                }
+                map.setViewport(viewPort);
+                map.removeOverlay(cityMark);
+            })
+        }
+
+        function getVillageMapData(type, id) {
+            currentZoomArea = "vill";
+            var obj = {
+                area: id,
+                types: type
+            };
+            if (title) {
+                //            obj.key=title
+                obj.title = title
+            }
+            $.getJSON(api.paramToUrl(api.mapHouseVillage, obj), function(data) {
+                var arr = [];
+                var logPointArr = [];
+                var latPointArr = [];
+                $.each(data.datas, function(index, item) {
+                    var point = new BMap.Point(item.log, item.lat)
+                    logPointArr.push(item.log);
+                    latPointArr.push(item.lat);
+                    if (item.count != 0) {
+                        var str = "<div data-id='{id}' class='marks'><div class='diqu'>{area}</div><div>共{count}套</div></div>"
+                        var content = str.replace(/\{area\}/, item.name).replace(/\{count\}/, item.count).replace(/\{id\}/, item.id)
+                        var m = setLableAndMark(content, point)
+                        villageMarkObjArr.push(m);
+                    }
+                    arr.push(point);
+                    //                map.clearOverlays()
+                })
+                mapNewList(id, v_id, 1, 10, function(data) {
+                    IObj.index = 1;
+                    IObj.isEnd = false;
+                    renderData(data)
+                });
+                isSetZoom = true;
+                var point = new BMap.Point(getAve(logPointArr), getAve(latPointArr));
+                var viewPort = {
+                    center: point,
+                    zoom: 14
+                }
+                map.setViewport(viewPort);
+                //            map.clearOverlays();
+
+                setTimeout(function() {
+                    $.each(areaMarkObjArr, function(index, item) {
+                        map.removeOverlay(item);
+                    })
+                }, 0)
+
+            })
+
+        }
+
+        function mapNewList(r_id, v_id, pageNum, pageSize, callback) {
+
+            var obj = {
+                r_id: r_id,
+                v_id: v_id,
+                order: order,
+                page_num: pageNum,
+                page_size: pageSize
+            };
+            if (title) {
+                obj.title = title;
+            }
+            $.getJSON(api.paramToUrl(api.used_lists, obj), function(data) {
+
+                if (callback) {
+                    callback(data)
+                }
+            })
+        }
+        IObj.infiite(function(obj) {
+            obj.isLoading = true;
+            if (obj.isEnd) return;
+            obj.index++;
+            mapNewList(r_id, v_id, obj.index, 10, function(data) {
+                IObj.isLoading = false;
+                if (data.code != 200) return;
+                if (data.count < 10) {
+                    IObj.isEnd = true;
+                }
+                $(".result-num").text(data.count)
+                $("#result-list").append(template("resultItem", data))
+            })
+        });
+
+        function renderData(data) {
+            IObj.isLoading = false;
+            if (data.code != 200) {
+                $(".result-num").text(0)
+                $("#result-list").html("");
+            };
+            if (data.count < 10) {
+                IObj.isEnd = true;
+            }
+            $(".result-num").text(data.count)
+            $("#result-list").html(template("resultItem", data))
+        }
+    </script>
+    <script type="text/javascript">
+        //点击列表返回
+        $(".back").click(function() {
+            window.location.href = "secondHandHousingList.html";
+        });
+        $(".searchBtn").click(function() {
+            var title = $(this).siblings("input[type=text]").val();
+            location.href = location.pathname + "?q=" + title
+        })
+    </script>
+    <script>
+        $(document).on("click", ".resultItem", function() {
+            $(".detail").show();
+            var id = $(this).attr("data-id");
+            getDataAndRender(id)
+            var $searach = $(".searach-result");
+            $searach.css("width", 1025)
+        })
+
+        function getDataAndRender(id) {
+            var des = $(".fakeloader").fakeLoader({
+                zIndex: 2000,
+                spinner: "spinner2",
+                bgColor: "#fff",
+                pos: "absolute"
+            });
+            $.getJSON(api.paramToUrl(api.used_detail, {
+                id: id
+            }), function(data) {
+                $(".detail").html((template("detail", data)))
+                initSwiper();
+                //            des.destroy();
+                $(".fakeloader").hide();
+            })
+
+        }
+    </script>
+</body>
+</html>
