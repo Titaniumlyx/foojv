@@ -208,7 +208,7 @@ module.exports = {
     ** Headers of the page
     */
     head: {
-        title: 'starter',
+        title: '福居网',
         meta: [{ charset: 'utf-8' }, { name: 'viewport', content: 'width=device-width, initial-scale=1' }, { hid: 'description', name: 'description', content: 'Nuxt.js project' }],
         link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }]
     },
@@ -221,7 +221,7 @@ module.exports = {
     */
 
     build: {
-        vendor: ['axios', 'md5'],
+        vendor: ['axios', 'md5', 'js-cookie'],
         /*
         ** Run ESLINT on save
         */
