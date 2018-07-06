@@ -316,7 +316,7 @@
                     total_priceData: [
                         {
                             title: "30万以下",
-                            id: '0-30'
+                            id: "0-30"
                         },
                         {
                             title: "30-40万",
@@ -328,7 +328,7 @@
                         },
                         {
                             title: "50万以上",
-                            id: '50-99999'
+                            id: '50'
                         }
                     ],
                     bedroomData: [
@@ -459,7 +459,7 @@
 
                 for(let key in formData){
                     if(formData[key] instanceof Array&&formData[key].length>0){
-                        params[key] = formData[key]
+                        params[key] = formData[key].map(item => item.id)
                     }
                 }
 
@@ -473,8 +473,8 @@
                     spinner: 'el-icon-loading',
                     background: 'rgba(0, 0, 0, 0.7)'
                 });
-
-                axios.get(api.paramToUrl(api.used_lists, params)).then(res => {
+                console.log(api.paramToUrl(api.used_lists,params));
+                axios.get(api.paramToUrl(api.used_lists,params)).then(res => {
                     this.houseCount = res.data.count;
                     this.houseArr = res.data.data;
                     loading.close()

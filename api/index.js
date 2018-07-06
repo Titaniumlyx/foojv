@@ -65,7 +65,9 @@ var api = {
         var str="";
         for (var o in b){
             if(b[o] instanceof Array){
+                console.log(1);
                 str+="/"+o+"/"+b[o].join();
+                console.log(str);
             }else{
                 str+="/"+o+"/"+b[o];
             }
