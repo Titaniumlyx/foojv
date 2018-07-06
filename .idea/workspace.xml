@@ -4,8 +4,7 @@
     <list default="true" id="a412bfe8-dd65-4dc3-9ca3-0ea726a5d19d" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/components/secondHand/baseMsg.vue" beforeDir="false" afterPath="$PROJECT_DIR$/components/secondHand/baseMsg.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/secondHand/myZoom.vue" beforeDir="false" afterPath="$PROJECT_DIR$/components/secondHand/myZoom.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/secondHand/switch-box.vue" beforeDir="false" afterPath="$PROJECT_DIR$/components/secondHand/switch-box.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/secondHand/_id.vue" beforeDir="false" afterPath="$PROJECT_DIR$/pages/secondHand/_id.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/style/switch-box.scss" beforeDir="false" afterPath="$PROJECT_DIR$/style/switch-box.scss" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
@@ -23,8 +22,8 @@
       <file leaf-file-name="_id.vue" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/pages/secondHand/_id.vue">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="116">
-              <caret line="4" column="55" lean-forward="true" selection-start-line="4" selection-start-column="55" selection-end-line="4" selection-end-column="55" />
+            <state relative-caret-position="203">
+              <caret line="7" column="17" selection-start-line="7" selection-start-column="17" selection-end-line="7" selection-end-column="17" />
               <folding>
                 <element signature="n#style#0;n#div#0;n#template#0;n#!!top" expanded="true" />
                 <element signature="e#428#487#0" expanded="true" />
@@ -45,8 +44,8 @@
       <file leaf-file-name="baseMsg.vue" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/components/secondHand/baseMsg.vue">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="600">
-              <caret line="31" column="90" selection-start-line="31" selection-start-column="90" selection-end-line="31" selection-end-column="90" />
+            <state relative-caret-position="300">
+              <caret line="9" column="8" lean-forward="true" selection-start-line="9" selection-start-column="8" selection-end-line="9" selection-end-column="8" />
               <folding>
                 <element signature="e#343#372#0" expanded="true" />
               </folding>
@@ -57,17 +56,17 @@
       <file leaf-file-name="switch-box.vue" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/components/secondHand/switch-box.vue">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="261">
+            <state relative-caret-position="1653">
               <caret line="65" column="58" lean-forward="true" selection-start-line="65" selection-start-column="58" selection-end-line="65" selection-end-column="58" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="switch-box.scss" pinned="false" current-in-tab="false">
+      <file leaf-file-name="switch-box.scss" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/style/switch-box.scss">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="174">
-              <caret line="33" column="21" lean-forward="true" selection-start-line="33" selection-start-column="21" selection-end-line="33" selection-end-column="21" />
+            <state relative-caret-position="245">
+              <caret line="25" column="37" selection-start-line="25" selection-start-column="37" selection-end-line="25" selection-end-column="37" />
             </state>
           </provider>
         </entry>
@@ -89,11 +88,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="myZoom.vue" pinned="false" current-in-tab="true">
+      <file leaf-file-name="myZoom.vue" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/components/secondHand/myZoom.vue">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="361">
-              <caret line="140" column="21" selection-start-line="140" selection-start-column="21" selection-end-line="140" selection-end-column="21" />
+            <state relative-caret-position="3857">
+              <caret line="132" column="16" lean-forward="true" selection-start-line="132" selection-start-column="16" selection-end-line="132" selection-end-column="16" />
             </state>
           </provider>
         </entry>
@@ -241,12 +240,12 @@
         <option value="$PROJECT_DIR$/components/secondHand/collect.vue" />
         <option value="$PROJECT_DIR$/pages/secondHand/index.vue" />
         <option value="$PROJECT_DIR$/components/vueZoom.vue" />
-        <option value="$PROJECT_DIR$/pages/secondHand/_id.vue" />
         <option value="$PROJECT_DIR$/store/index.js" />
-        <option value="$PROJECT_DIR$/style/switch-box.scss" />
         <option value="$PROJECT_DIR$/components/secondHand/switch-box.vue" />
-        <option value="$PROJECT_DIR$/components/secondHand/baseMsg.vue" />
         <option value="$PROJECT_DIR$/components/secondHand/myZoom.vue" />
+        <option value="$PROJECT_DIR$/pages/secondHand/_id.vue" />
+        <option value="$PROJECT_DIR$/components/secondHand/baseMsg.vue" />
+        <option value="$PROJECT_DIR$/style/switch-box.scss" />
       </list>
     </option>
   </component>
@@ -513,7 +512,7 @@
       <workItem from="1530349814830" duration="41506000" />
       <workItem from="1530557218210" duration="11660000" />
       <workItem from="1530624470609" duration="22893000" />
-      <workItem from="1530803287442" duration="12479000" />
+      <workItem from="1530803287442" duration="14565000" />
     </task>
     <task id="LOCAL-00001" summary="proxy false">
       <created>1527621944396</created>
@@ -641,11 +640,18 @@
       <option name="project" value="LOCAL" />
       <updated>1530852087028</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary="组件完成">
+      <created>1530857327619</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1530857327619</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="329434000" />
+    <option name="totallyTimeSpent" value="331520000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -726,7 +732,8 @@
     <MESSAGE value="添加二手房详情页面" />
     <MESSAGE value="组件编写中" />
     <MESSAGE value="切换组件基本完成，缺少长度判断逻辑。" />
-    <option name="LAST_COMMIT_MESSAGE" value="切换组件基本完成，缺少长度判断逻辑。" />
+    <MESSAGE value="组件完成" />
+    <option name="LAST_COMMIT_MESSAGE" value="组件完成" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1033,17 +1040,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/pages/secondHand/_id.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="116">
-          <caret line="4" column="55" lean-forward="true" selection-start-line="4" selection-start-column="55" selection-end-line="4" selection-end-column="55" />
-          <folding>
-            <element signature="n#style#0;n#div#0;n#template#0;n#!!top" expanded="true" />
-            <element signature="e#428#487#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/pages/secondHand/index.vue">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="174">
@@ -1066,34 +1062,45 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/style/switch-box.scss">
+    <entry file="file://$PROJECT_DIR$/pages/secondHand/_id.vue">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="174">
-          <caret line="33" column="21" lean-forward="true" selection-start-line="33" selection-start-column="21" selection-end-line="33" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/components/secondHand/switch-box.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="261">
-          <caret line="65" column="58" lean-forward="true" selection-start-line="65" selection-start-column="58" selection-end-line="65" selection-end-column="58" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/components/secondHand/baseMsg.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="600">
-          <caret line="31" column="90" selection-start-line="31" selection-start-column="90" selection-end-line="31" selection-end-column="90" />
+        <state relative-caret-position="203">
+          <caret line="7" column="17" selection-start-line="7" selection-start-column="17" selection-end-line="7" selection-end-column="17" />
           <folding>
-            <element signature="e#343#372#0" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#template#0;n#!!top" expanded="true" />
+            <element signature="e#428#487#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/components/secondHand/myZoom.vue">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="361">
-          <caret line="140" column="21" selection-start-line="140" selection-start-column="21" selection-end-line="140" selection-end-column="21" />
+        <state relative-caret-position="3857">
+          <caret line="132" column="16" lean-forward="true" selection-start-line="132" selection-start-column="16" selection-end-line="132" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/components/secondHand/baseMsg.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="300">
+          <caret line="9" column="8" lean-forward="true" selection-start-line="9" selection-start-column="8" selection-end-line="9" selection-end-column="8" />
+          <folding>
+            <element signature="e#343#372#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/components/secondHand/switch-box.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1653">
+          <caret line="65" column="58" lean-forward="true" selection-start-line="65" selection-start-column="58" selection-end-line="65" selection-end-column="58" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/style/switch-box.scss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="245">
+          <caret line="25" column="37" selection-start-line="25" selection-start-column="37" selection-end-line="25" selection-end-column="37" />
         </state>
       </provider>
     </entry>
