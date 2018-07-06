@@ -245,7 +245,11 @@
             </div>
         </div>
 
-
+        <el-pagination
+                background
+                layout="prev, pager, next"
+                :total="houseCount" @current-change="handleNext">
+        </el-pagination>
         <friendlyLink></friendlyLink>
     </div>
 </template>
@@ -499,6 +503,11 @@
                             this.getData();
                         })
                 }
+            },
+            handleNext(val) {
+                console.log(val)
+                this.params.page_num = val;
+                this.getData();
             }
         },
         computed: {
