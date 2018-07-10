@@ -245,11 +245,13 @@
             </div>
         </div>
 
-        <el-pagination
-                background
-                layout="prev, pager, next"
-                :total="houseCount" @current-change="handleNext">
-        </el-pagination>
+        <div class="pagination-wrap clearfix">
+            <el-pagination class="flr"
+                    background
+                    layout="prev, pager, next"
+                    :total="houseCount" @current-change="handleNext">
+            </el-pagination>
+        </div>
         <friendlyLink></friendlyLink>
     </div>
 </template>
@@ -754,6 +756,9 @@
         }
     }
 
-
+    .pagination-wrap {
+        width: 1100px;
+        margin: 0 auto;
+    }
 </style>
 
