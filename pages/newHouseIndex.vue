@@ -1,0 +1,1 @@
+<template>    <div>    </div></template><script>    export default {        layout: "newHouse",        data() {            return {}        }    }</script><style scoped></style>
